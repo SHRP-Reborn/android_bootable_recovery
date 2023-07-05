@@ -31,7 +31,7 @@ void SHRP::INIT(){
 
 void SHRP::printRecDetails(){
 	string tmp;
-	gui_msg(Msg("|SKYHAWK RECOVERY PROJECT",0));
+	gui_msg(Msg("|SKYHAWK RECOVERY PROJECT REBORN",0));
 	DataManager::GetValue("shrp_ver",tmp);
 	tmp="|Version - "+tmp;
 	gui_msg(Msg(tmp.c_str(),0));

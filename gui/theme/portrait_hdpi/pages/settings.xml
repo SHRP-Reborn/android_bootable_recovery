@@ -52,7 +52,7 @@
 				<listitem name="{@unmount_sys_install=Unmount System before installing a ZIP}">
 					<data variable="tw_unmount_system"/>
 				</listitem>
-				<listitem name="{@auto_reflashtwrp_chk=Automatically Reflash SHRP after flashing a ROM}">
+				<listitem name="{@auto_reflashtwrp_chk=Automatically Reflash SHRP Reborn after flashing a ROM}">
 					<condition var1="tw_has_boot_slots" var2="1"/>
 					<condition var1="tw_has_repack_tools" var2="1"/>
 					<condition var1="tw_no_flash_current_twrp" var2="0"/>
@@ -64,7 +64,7 @@
 				<condition var1="tw_is_decrypted" var2="1"/>
 				<placement x="300" y="1480" w="450" h="110"/>
 				<fill color="%subBackgroundColor%"/>
-				<text>{@change_twrp_folder_btn=Change SHRP folder}</text>
+				<text>{@change_twrp_folder_btn=Change SHRP Reborn folder}</text>
 				<action function="page">changeTwrpFolder</action>
 			</button>
 
@@ -400,7 +400,7 @@
 				<listitem name="{@c_dev_mode=Dev mode}">
 					<data variable="c_devMode"/>
 				</listitem>
-				<listitem name="{@c_disable_theme_survival=Disable SHRP theme survival}">
+				<listitem name="{@c_disable_theme_survival=Disable SHRP Reborn theme survival}">
 					<condition var1="av_express" op="=" var2="1"/>
 					<data variable="c_shrpUpdate"/>
 				</listitem>

@@ -7,7 +7,7 @@
 			<text>
 				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
 				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
-				<text>{@c_shrp_about=S H R P}</text>
+				<text>{@c_shrp_about=S H R P Reborn}</text>
 			</text>
 
 			<checkbox>

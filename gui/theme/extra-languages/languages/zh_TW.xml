@@ -827,7 +827,7 @@
 		<string name="enc_enabled">已啟用</string>
 		<string name="c_clear">清除</string>
 		<string name="c_credit">Credit - </string>
-		<string name="c_tweaks_info_ex">SHRP的系統優化</string>
+		<string name="c_tweaks_info_ex">SHRP Reborn的系統優化</string>
 		<string name="c_subs">Substratum Overlay</string>
 		<string name="c_cfp">清除指紋</string>
 		<string name="c_fc">強制加密</string>
@@ -1015,7 +1015,7 @@
 		<string name="changeSlot">Change Slot</string>
 		<string name="changeSlotQuestion">Want to change the slot to </string>
 		<string name="setTimeOffset">Set time offset</string>
-		<string name="c_disable_theme_survival">Disable SHRP theme survival</string>
+		<string name="c_disable_theme_survival">Disable SHRP Reborn theme survival</string>
 		<string name="c_disable_auto_reboot_ota">Prevent auto reboot after OTA</string>
 		<string name="c_magisk_install_after_ota">Install Magisk automatically after OTA</string>
 		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>

@@ -146,7 +146,7 @@ void Express::init(){
 	string versionPath = basePath + "/etc/shrp/version";
 	string result;
 	DataManager::GetValue("buildNo",buildNo);
-	LOGINFO("Welcome to SHRP -----------\n");
+	LOGINFO("Welcome to SHRP Reborn -----------\n");
 	
 	// Creating Env for operation
 	envRet ret = Express::provideEnvironment(true);
@@ -320,7 +320,7 @@ void Express::updateSHRPBasePath(){
 #else
 	DataManager::SetValue("shrpBasePath", rootPath + "/system");
 #endif
-	LOGINFO("SHRP CURRENT BASEPATH : %s\n", DataManager::GetStrValue("shrpBasePath").c_str());
+	LOGINFO("SHRP REBORN CURRENT BASEPATH : %s\n", DataManager::GetStrValue("shrpBasePath").c_str());
 }
 
 
@@ -529,8 +529,8 @@ bool FlashManager::injectSHRP_Pre(){
 void FlashManager::injectSHRP_Post(bool preConfirm){
 	if(!preConfirm){
 		if(DataManager::GetIntValue(TW_INJECT_AFTER_ZIP)){
-			gui_msg(Msg("[!] Please flash a SHRP zip file manually.",0));
-			gui_msg(Msg("[!] SHRP injection aborted/failed.",0));
+			gui_msg(Msg("[!] Please flash a SHRP Reborn zip file manually.",0));
+			gui_msg(Msg("[!] SHRP Reborn injection aborted/failed.",0));
 		}
 		return;
 	}
@@ -542,7 +542,7 @@ void FlashManager::injectSHRP_Post(bool preConfirm){
 #endif
   	}
 	
-	gui_msg(Msg(TWFunc::Exec_Cmd("sh /twres/scripts/restore_ab.sh") == 0 ? "[i] SHRP restored successfully!" : "[!!] Restore failed! Please flash manually a SHRP zip file.",0));
+	gui_msg(Msg(TWFunc::Exec_Cmd("sh /twres/scripts/restore_ab.sh") == 0 ? "[i] SHRP Reborn restored successfully!" : "[!!] Restore failed! Please flash manually a SHRP Reborn zip file.",0));
 #ifdef TW_USE_TOOLBOX
 	TWFunc::Exec_Cmd("setprop tw_inject_after_zip 0");
 #endif

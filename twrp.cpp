@@ -300,7 +300,7 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 
 #ifdef TW_HAS_MTP
 	if(DataManager::GetIntValue("recLockStatus") == 0) {
-	    LOGINFO("SHRP is unlocked; processing MTP now.\n");
+	    LOGINFO("SHRP Reborn is unlocked; processing MTP now.\n");
 	    char mtp_crash_check[PROPERTY_VALUE_MAX];
 	    property_get("mtp.crash_check", mtp_crash_check, "0");
 	    if (DataManager::GetIntValue("tw_mtp_enabled")
@@ -322,7 +322,7 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 		PartitionManager.Disable_MTP();
 	    }
 	}else{
-	    LOGINFO("SHRP is locked; MTP is not allowing to start.\n");
+	    LOGINFO("SHRP Reborn is locked; MTP is not allowing to start.\n");
 	}
 #endif
 

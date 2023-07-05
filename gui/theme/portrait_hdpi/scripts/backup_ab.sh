@@ -1,5 +1,5 @@
 #!/bin/sh
-# Backup script for SHRP injection
+# Backup script for SHRP Reborn injection
 # Part of this code belongs to TWRP's update-binary
 
 ui_print() { $BOOTMODE && echo "$1" || echo -e "ui_print $1\nui_print" >> $OUTFD; }

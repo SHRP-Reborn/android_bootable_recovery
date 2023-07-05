@@ -106,7 +106,7 @@
 					<condition var1="tw_has_deviceab" var2="1"/>
 					<data variable="tw_active_slot_install"/>
 				</listitem>
-				<listitem name="{@inject_shrp_chk=Inject SHRP after install}">
+				<listitem name="{@inject_shrp_chk=Inject SHRP Reborn after install}">
 					<condition var1="tw_has_injecttwrp" var2="1"/>
 					<data variable="tw_inject_after_zip"/>
 				</listitem>
@@ -120,7 +120,7 @@
 				<listitem name="{@skip_digest_zip_chk=Skip Digest check before installing zip}">
 					<data variable="tw_skip_digest_check_zip"/>
 				</listitem>
-				<listitem name="{@auto_reflashtwrp_chk=Automatically Reflash SHRP after flashing a ROM}">
+				<listitem name="{@auto_reflashtwrp_chk=Automatically Reflash SHRP Reborn after flashing a ROM}">
 					<condition var1="tw_has_boot_slots" var2="1"/>
 					<condition var1="tw_has_repack_tools" var2="1"/>
 					<condition var1="tw_no_flash_current_twrp" var2="0"/>
