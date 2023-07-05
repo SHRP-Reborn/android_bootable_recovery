@@ -266,7 +266,6 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(themeInit);
 		ADD_ACTION(SetColor);
 		ADD_ACTION(applyDefaultTheme);
-		ADD_ACTION(applyCustomTheme);
 		ADD_ACTION(fileManagerOp);
 		ADD_ACTION(fTools);
 		ADD_ACTION(revDir);
@@ -3073,35 +3072,6 @@ int GUIAction::applyDefaultTheme(std::string arg __unused){
 	return 0;
 }
 
-int GUIAction::applyCustomTheme(std::string arg){
-	ThemeManager TM;
-	bool err;
-	if(TM.initCustomTheme(arg)){
-		LOGINFO("SHRP CUSTOM THEME Initialization completed\n");
-	}else{
-		TM.removeTempData();
-		LOGINFO("SHRP CUSTOM THEME Initialization failed. Exiting...\n");
-		return 0;
-	}
-	//Creating env for theme patching
-	GUIAction::themeInit("dummy");
-
-	//Applying custom theme
-	err=TM.applyCustomTheme() == true ? false : true;
-
-	if(!err){
-		GUIAction::c_repack("dummy");
-		GUIAction::customReload("main2");
-	}else{
-		if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("cp -r /tmp/bak/ /twres/");}
-		if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("rm -rf /tmp/bak");}
-		if(TWFunc::Path_Exists("/tmp/work")){TWFunc::Exec_Cmd("rm -rf /tmp/work");}
-		DataManager::SetValue("themeProcessErr",1);
-	}
-
-	return 0;
-}
-
 int GUIAction::SetColor(std::string arg){
 	DataManager::SetValue(DataManager::GetStrValue("assignVar"),arg.c_str());
 	DataManager::SetValue("colorHolder",arg.c_str());
@@ -3145,7 +3115,6 @@ int GUIAction::fileManagerOp(std::string arg __unused){
 		createFolder
 		zipFolder
 		unzipFile
-		applyCustomTheme
 		ImgUnpack [Not Sure]
 		ImgRepack [Not Sure]
 		Ramdisk	[Not Sure]
@@ -3216,36 +3185,7 @@ int GUIAction::fileManagerOp(std::string arg __unused){
 	}else if(arg == "extractByLocation"){
 		DataManager::SetValue("fActionName", gui_parse_text("{@fUpack=Unpacking}"));
 		result = FileManager::extract(filePath, to);
-	
-	
-	}else if(arg == "applyCustomTheme"){
-		DataManager::SetValue("fActionName", gui_parse_text("{@fApplyCustomTheme=Applying custom theme}"));
-		ThemeManager TM;
-		if(TM.initCustomTheme(filePath)){
-			LOGINFO("SHRP CUSTOM THEME Initialization completed\n");
-			result = true;
-		}else{
-			TM.removeTempData();
-			LOGINFO("SHRP CUSTOM THEME Initialization failed. Exiting...\n");
-			result = false;
-		}
-		//Creating env for theme patching
-		if(result) GUIAction::themeInit("dummy");
 
-		//Applying custom theme
-		if(result){
-			result = TM.applyCustomTheme();
-		}
-
-		if(result){
-			GUIAction::c_repack("dummy");
-		}else{
-			if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("cp -r /tmp/bak/ /twres/");}
-		}
-		if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("rm -rf /tmp/bak");}
-		if(TWFunc::Path_Exists("/tmp/work")){TWFunc::Exec_Cmd("rm -rf /tmp/work");}
-		
-		if(result) GUIAction::reload("dummy");
 	}else if(arg == "md5" || arg == "sha1" || arg == "sha256"){
 		DataManager::SetValue("fActionName", gui_parse_text("{@check_for_digest=Checking for Digest file...}"));
 		string tmp = filePath;

@@ -821,16 +821,4 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
     //FActionSettingVariables
     mPersist->SetValue("overwriteExisting", 0);
     mPersist->SetValue("useHighCompression", 0);
-
-    //CustomTheme
-    mData->SetValue("themeName", "Theme");
-    mData->SetValue("themeBackgroundColor", "");
-    mData->SetValue("themeAccentColor", "");
-    mData->SetValue("themeTextColor", "");
-    mData->SetValue("themeSecondaryTextColor", "");
-    mData->SetValue("themeNavColor", "");
-
-
-
-
 }
