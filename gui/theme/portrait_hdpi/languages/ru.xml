@@ -924,8 +924,6 @@
 		<string name="fDeleteInfo">Вы действительно хотите удалить? Этот процесс нельзя отменить.</string>
 		<string name="fUpack">Распаковка</string>
 		<string name="fInfoBusy">Больше информации</string>
-		<string name="fApplyCustomTheme">Применение пользовательской темы</string>
-		<string name="fApplyCustomThemeConfirm">Вы действительно хотите применить кастомную тему?</string>
 		<string name="fOperationS">Операция успешна</string>
 		<string name="fOperationF">Операция не удалась</string>
 		<string name="fExists">Файл или папка с таким же именем существует</string>

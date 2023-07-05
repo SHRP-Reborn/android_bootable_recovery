@@ -322,16 +322,6 @@
 						<action function="page">fileManager2</action>
 					</actions>
 				</listitem>
-				<listitem name="{@c_apply_theme=Apply theme}">
-						<condition var1="isTheme" op="=" var2="1"/>
-					<condition var1="shrp_lite" op="=" var2="0"/>
-						<icon resource="actionApplyTheme"/>
-					<data variable="dummy"/>
-					<actions>
-						<action function="set">fManagerAction=applyCustomTheme</action>
-						<action function="overlay">customThemeConfirm</action>
-					</actions>
-				</listitem>
 			</listbox>
 
 
@@ -742,42 +732,6 @@
 				<actions>
 					<action function="overlay"/>
 					<action function="set">fAction=0</action>
-					<action function="overlay">fActionPage</action>
-				</actions>
-			</button>
-
-			<button style="cnfrmBtn">
-				<placement x="360" y="%rndPos115%" w="310" h="110"/>
-				<fill color="%tranparent%"/>
-				<text>{@cancel_btn=Cancel}</text>
-				<action function="overlay"/>
-			</button>
-		</page>
-
-
-		<page name="customThemeConfirm">
-			<template name="overlayPage"/>
-
-			<button>
-				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
-				<fill color="%backgroundColor%"/>
-			</button>
-			<text style="cnfrmHeadTitle">
-				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
-				<text>{@c_confirm=Confirm}</text>
-			</text>
-
-			<text style="textbox">
-				<placement x="%c_hawk_base_column%" y="%rndPos100%"/>
-				<text>{@fApplyCustomThemeConfirm=Do you really want to apply custom theme?}</text>
-			</text>
-
-			<button style="cnfrmBtn">
-				<placement x="700" y="%rndPos115%" w="310" h="110"/>
-				<fill color="%subBackgroundColor%"/>
-				<text>{@confirm_hdr=Confirm}</text>
-				<actions>
-					<action function="overlay"/>
 					<action function="overlay">fActionPage</action>
 				</actions>
 			</button>

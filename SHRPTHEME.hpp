@@ -21,11 +21,6 @@ class ThemeManager{
         };
         vector<color> colors;
     public:
-        //CustomTheme Functions
-        bool initCustomTheme(string path);
-        bool verifyColor(string hex);
-        void removeTempData();
-        bool applyCustomTheme();
 
         //Default Functions
         int hexToInt(string str); //Convert Hex value to int for processing the color val

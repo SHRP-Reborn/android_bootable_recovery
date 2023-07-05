@@ -403,7 +403,6 @@ protected:
 	int themeInit(std::string arg);
 	int SetColor(std::string arg);
 	int applyDefaultTheme(std::string arg);
-	int applyCustomTheme(std::string arg);
 	int fileManagerOp(std::string arg);
 	int fTools(std::string arg);
 	int revDir(std::string arg);

@@ -1014,8 +1014,6 @@
 		<string name="fDeleteInfo">Do you really want to delete? This process cannot be undone.</string>
 		<string name="fUpack">Unpacking</string>
 		<string name="fInfoBusy">Gathering Infomation</string>
-		<string name="fApplyCustomTheme">Applying custom theme</string>
-		<string name="fApplyCustomThemeConfirm">Do you really want to apply custom theme?</string>
 		<string name="fOperationS">Operation successful</string>
 		<string name="fOperationF">Operation failed</string>
 		<string name="fExists">Same name file or folder exists</string>
