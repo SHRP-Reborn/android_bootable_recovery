@@ -417,10 +417,11 @@ int main(int argc, char **argv) {
 	SHRP::INIT();
 
 #ifdef TW_LOAD_VENDOR_MODULES
-	if (startup.Get_Fastboot_Mode())
-	android::base::SetProperty("ro.boot.fastboot", "1");
+	if (startup.Get_Fastboot_Mode()) {
+		android::base::SetProperty("ro.boot.fastboot", "1");
 		PartitionManager.Prepare_Super_Volume(PartitionManager.Find_Partition_By_Path("/vendor"));
 		PartitionManager.Prepare_Super_Volume(PartitionManager.Find_Partition_By_Path("/vendor_dlkm"));
+	}
 	KernelModuleLoader::Load_Vendor_Modules();
 #endif
 
