@@ -103,8 +103,37 @@ else
     LOCAL_CFLAGS += -DTW_EXCLUDE_APEX
 endif
 
-LOCAL_STATIC_LIBRARIES += libavb libtwrpinstall libminadbd_services libinit libsnapshot_nobinder update_metadata-protos librecovery_utils libhealthhalutils
-LOCAL_SHARED_LIBRARIES += libfs_mgr libhardware android.hardware.boot@1.0 android.hardware.boot@1.1 android.hardware.boot@1.2 libprotobuf-cpp-lite liblp libutils libhidlbase android.hardware.health@2.0
+LOCAL_STATIC_LIBRARIES += libavb \
+                          libhealthhalutils \
+                          libhealthshim \
+                          libinit \
+                          libminadbd_services \
+                          librecovery_utils \
+                          libsnapshot \
+                          libsnapshot_cow \
+                          libsnapshot_nobinder \
+                          libtwrpinstall \
+                          libzstd \
+                          update_metadata-protos
+
+LOCAL_SHARED_LIBRARIES += android.hardware.boot@1.0 \
+                          android.hardware.boot@1.1 \
+                          android.hardware.boot@1.2 \
+                          android.hardware.health@2.0 \
+                          android.hardware.health@2.1 \
+                          android.hardware.health-V3-ndk \
+                          android.hardware.health-translate-ndk \
+                          libbinder \
+                          libbinder_ndk \
+                          libboot_control_client \
+                          libfs_mgr \
+                          libhardware \
+                          libhidlbase \
+                          liblog \
+                          liblp \
+                          liblz4 \
+                          libprotobuf-cpp-lite \
+                          libutils
 LOCAL_C_INCLUDES += \
     system/core/fs_mgr/libfs_avb/include/ \
     system/core/fs_mgr/include_fstab/ \
@@ -368,8 +397,8 @@ ifeq ($(TW_INCLUDE_CRYPTO), true)
         android.hardware.gatekeeper@1.0 \
         android.hardware.weaver@1.0 \
         android.frameworks.stats@1.0 \
-        android.security.maintenance-ndk_platform \
-        android.system.keystore2-V1-ndk_platform \
+        android.security.maintenance-ndk \
+        android.system.keystore2-V4-ndk \
         libkeyutils \
         liblog \
         libsqlite.recovery \
