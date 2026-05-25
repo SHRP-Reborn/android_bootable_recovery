@@ -70,9 +70,10 @@ string FileManager::getPrevFolderPath(string str){
     }
 }
 
-bool FileManager::isFile(string str){
+bool FileManager::isFile(string path){
     std::error_code ec;
-    return (fs::is_directory(str.c_str(), ec) ? false : true);
+    return fs::exists(path, ec) &&
+           fs::is_regular_file(path, ec);
 }
 
 string FileManager::getSizeStr(string str){
@@ -143,39 +144,51 @@ bool FileManager::copy(string from, string to, bool overwrite){
 bool FileManager::copy(string from, string to, int multiple, bool overwrite){
     if(multiple){
         vector<string> fromAdv = TWFunc::split_string(from, '|', true);
-        bool ret;
-        for(auto it = fromAdv.begin(); it < fromAdv.end(); it++){
-            ret = copy(*it, to, overwrite);
+        bool ret = true;
+        for (const auto& item : fromAdv) {
+            ret &= copy(item, to, overwrite);
         }
         return ret;
     }else{
         return copy(from, to, overwrite);
     }
 }
-bool FileManager::move(string from, string to, bool overwrite){
-    string objName = isFile(from) ? getFileName(from) : getFolderName(from);
-    to = to == "/" ? to + objName : to + "/" + objName;
-    LOGINFO("Moving From - %s To %s\n",from.c_str(),to.c_str());
-    string command = overwrite ? "mv " : "mv -n ";
-    if(!TWFunc::Path_Exists(to)){
-        return TWFunc::Exec_Cmd(command + string(1,'"') + from + string(1,'"') + " " + string(1,'"') + to + string(1,'"'), true, true) == 0 ? true : false;
-    }else{
-        return false;
+bool FileManager::move(
+    string from,
+    string to,
+    bool overwrite
+){
+    std::error_code ec;
+
+    if (overwrite && fs::exists(to, ec)) {
+        fs::remove_all(to, ec);
     }
+
+    fs::rename(from, to, ec);
+    return !ec;
 }
-bool FileManager::move(string from, string to, int multiple, bool overwrite){
+bool FileManager::move(
+    string from,
+    string to, 
+    int multiple, 
+    bool overwrite
+){
     if(multiple){
         vector<string> fromAdv = TWFunc::split_string(from, '|', true);
-        bool ret;
-        for(auto it = fromAdv.begin(); it < fromAdv.end(); it++){
-            ret = move(*it, to, overwrite);
+        bool ret = true;
+        for (const auto& item : fromAdv) {
+            ret &= move(item, to, overwrite);
         }
         return ret;
     }else{
         return move(from, to, overwrite);
     }
 }
-bool FileManager::rename(string from, string objName, bool overwrite){
+bool FileManager::rename(
+    string from,
+    string objName,
+    bool overwrite
+){
     string str = getPrevFolderPath(from);
     string command = overwrite ? "mv " : "mv -n ";
     str = (str == "" || str == "/") ? str + objName : str + "/" + objName;
@@ -213,12 +226,16 @@ bool FileManager::remove(string path, int multiple){
     }
 }
 
-bool FileManager::createFolder(string path){
-    string cmd = "mkdir -p " + string(1, '"') + path + string(1, '"') + ";";
-    return (TWFunc::Exec_Cmd(cmd) == 0 ? true : false);
+bool FileManager::createFolder(string path) {
+    std::error_code ec;
+    fs::create_directories(path, ec);
+    return !ec;
 }
 
-string FileManager::setPermission(string path, string chmod){
+string FileManager::setPermission(
+    string path,
+    string chmod
+){
     return "chmod " + chmod + " " + string(1,'"') + path + string(1,'"') + ";";
 }
 string FileManager::setPermission(string path, int ownerR, int ownerW, int ownerX, int groupR, int groupW, int groupX, int globalR, int globalW, int globalX){

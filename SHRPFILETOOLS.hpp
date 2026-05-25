@@ -17,7 +17,7 @@ using namespace std;
 class FileManager{
     public:
         //Helper functions
-        static bool isFile(string str);
+        static bool isFile(string path);
         static bool isValidOp(string str);
         static string getFileName(string str);
         static string getFolderName(string str);
