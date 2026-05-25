@@ -220,7 +220,7 @@
 		<template name="slotPanel">
 			<image>
 				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="744" y="1126"/>
+				<placement x="744" y="1130"/>
 				<image resource="slotPanel"/>
 			</image>
 
