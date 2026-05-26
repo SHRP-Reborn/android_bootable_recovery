@@ -262,7 +262,7 @@
 		<image name="fileLocExternal" filename="fileLocExternal" retainaspect="1"/>
 		<image name="fileLocOtg" filename="fileLocOtg" retainaspect="1"/>
 		<image name="fileMangerSettings" filename="fileMangerSettings" retainaspect="1"/>
-		<image name="slotPanel" filename="slotPanel" retainaspect="1"/>
+		<image name="slotPanel" filename="slotPanel"/>
 
 
 		<image name="officialBuild" filename="officialBuild" retainaspect="1"/>
