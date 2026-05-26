@@ -1,5 +1,6 @@
 /*
 Copyright 2019 - 2020 SKYHAWK RECOVERY PROJECT
+Copyright 2020 - 2026 SkyHawk Recovery Project Reborn
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,6 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
 #include <string>
 #include <iterator>
 #include <vector>
@@ -27,12 +29,7 @@ using namespace std;
 #include "SHRPGUI.hpp"
 
 void processRefPlacement(int* var, bool isPlus, int refval){
-    int tmp=*var;
-    if(isPlus){
-        *var = tmp + refval;
-    }else{
-        *var = tmp - refval;
-    }
+    *var += isPlus ? refval : -refval;
 }
 
 vector<string> fetchExtn(string str){

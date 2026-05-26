@@ -1,5 +1,6 @@
 /*
 Copyright 2019 - 2020 SKYHAWK RECOVERY PROJECT
+Copyright 2020 - 2026 SkyHawk Recovery Project Reborn
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,6 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
 #include <stdio.h>
 #include <string>
 #include <sstream>
@@ -41,33 +43,18 @@ using namespace std;
 
 
 string FileManager::getFileName(string str){
-    if(str.find_last_of('/') == string::npos){
-        return str;
-    }
-    return (str.substr(str.find_last_of('/')+1, (str.length() - str.find_last_of('/'))-1));
+    return fs::path(str).filename().string();
 }
-string FileManager::getFolderName(string str){
-    if(str.find_last_of('/') == string::npos){
-        return str;
-    }
 
-    if(str.find_last_of('/') == str.length()-1){
-        str = str.substr(0, str.find_last_of('/'));
-    }
-    return (str.substr(str.find_last_of('/')+1, (str.length() - str.find_last_of('/'))-1));
+string FileManager::getFolderName(string str){
+    fs::path p(str);
+    if (p.has_filename() && p.filename().empty())
+        p = p.parent_path();
+    return p.filename().string();
 }
+
 string FileManager::getPrevFolderPath(string str){
-    if(str.find_last_of('/') == str.length()-1){//If Path /sdcard/hello/ then It will remove / from last
-        // /sdcard/hello
-        str = str.substr(0, str.find_last_of('/'));
-    }
-    if(str.find_last_of('/') == 0 && str.length() > 1){// /sdcard
-        return "";
-    }else if(str.find_last_of('/') == 0 || str.find_last_of('/') == string::npos){
-        return "";
-    }else{
-        return (str.substr(0, str.find_last_of('/')));
-    }
+    return fs::path(str).parent_path().string();
 }
 
 bool FileManager::isFile(string path){
@@ -141,6 +128,7 @@ bool FileManager::copy(string from, string to, bool overwrite){
     fs::copy(from, to, overwrite ? copyOptionsOverwrite : copyOptionsDefault, ec);
     return (bool)!ec;
 }
+
 bool FileManager::copy(string from, string to, int multiple, bool overwrite){
     if(multiple){
         vector<string> fromAdv = TWFunc::split_string(from, '|', true);
@@ -153,6 +141,7 @@ bool FileManager::copy(string from, string to, int multiple, bool overwrite){
         return copy(from, to, overwrite);
     }
 }
+
 bool FileManager::move(
     string from,
     string to,
@@ -160,13 +149,26 @@ bool FileManager::move(
 ){
     std::error_code ec;
 
+    string objName =
+        isFile(from)
+        ? getFileName(from)
+        : getFolderName(from);
+
+    to = (to == "/")
+        ? to + objName
+        : to + "/" + objName;
+
     if (overwrite && fs::exists(to, ec)) {
+    if (fs::is_directory(to, ec))
         fs::remove_all(to, ec);
+    else
+        fs::remove(to, ec);
     }
 
     fs::rename(from, to, ec);
     return !ec;
 }
+
 bool FileManager::move(
     string from,
     string to, 
@@ -184,20 +186,39 @@ bool FileManager::move(
         return move(from, to, overwrite);
     }
 }
+
 bool FileManager::rename(
     string from,
     string objName,
     bool overwrite
 ){
-    string str = getPrevFolderPath(from);
-    string command = overwrite ? "mv " : "mv -n ";
-    str = (str == "" || str == "/") ? str + objName : str + "/" + objName;
-    if(!TWFunc::Path_Exists(str)){
-        return TWFunc::Exec_Cmd(command + string(1,'"') + from + string(1,'"') + " " + string(1,'"') + str + string(1,'"'), true, true) == 0 ? true : false;
-    }else{
+    std::error_code ec;
+
+    string path =
+        getPrevFolderPath(from);
+
+    string target =
+        (path.empty() || path == "/")
+        ? path + objName
+        : path + "/" + objName;
+
+    if (!overwrite &&
+        fs::exists(target, ec))
+    {
         return false;
     }
+
+    if (overwrite &&
+        fs::exists(target, ec))
+    {
+        fs::remove_all(target, ec);
+    }
+
+    fs::rename(from, target, ec);
+
+    return !ec;
 }
+
 bool FileManager::removeFile(string path){
     std::error_code ec;
     return fs::remove(path, ec);
@@ -216,9 +237,9 @@ bool FileManager::remove(string path){
 bool FileManager::remove(string path, int multiple){
     if(multiple){
         vector<string> fromAdv = TWFunc::split_string(path, '|', true);
-        bool ret;
-        for(auto it = fromAdv.begin(); it < fromAdv.end(); it++){
-            ret = remove(*it);
+        bool ret = true;
+        for (const auto& item : fromAdv) {
+            ret &= remove(item);
         }
         return ret;
     }else{
@@ -238,6 +259,7 @@ string FileManager::setPermission(
 ){
     return "chmod " + chmod + " " + string(1,'"') + path + string(1,'"') + ";";
 }
+
 string FileManager::setPermission(string path, int ownerR, int ownerW, int ownerX, int groupR, int groupW, int groupX, int globalR, int globalW, int globalX){
     int chmod = 0;
     chmod += ownerR ? 400 : 0;
@@ -256,6 +278,7 @@ string FileManager::setPermission(string path, int ownerR, int ownerW, int owner
     ss<<chmod;
     return "chmod " + ss.str() + " " + path + ";";
 }
+
 string FileManager::getStrPermission(string path){
     string ret;
     stringstream ss;
@@ -332,17 +355,6 @@ bool FileManager::extract(string filePath, string to){
     return (TWFunc::Exec_Cmd("unzip -d " + string(1,'"') + to + string(1,'"') + " " + string(1,'"') + filePath + string(1,'"'), true, true) == 0 ? true : false);
 }
 
-void getHex(unsigned char* a, unsigned char* b){
-    int i, j;
-    i = j = 0;
-    while(a[i] != '\0'){
-        sprintf((char*) (b+j), "%02x", a[i]);
-        i++;
-        j+=2;
-    }
-    b[j++] = '\0';
-}
-
 string FileManager::generate_Hash(string path, string hashAlgo){
     // LOGINFO("Stage 0\n");
     // EVP_MD_CTX mdctx;
@@ -388,6 +400,10 @@ string FileManager::generate_Hash(string path, string hashAlgo){
     ss << std::hex << std::uppercase << std::setfill('0');
     ifstream ifs(path, std::ifstream::binary);
 
+    if (!ifs.is_open()) {
+        return "null";
+    }
+
     char buffer[BUFFSIZE];
     unsigned char digest[MD5_DIGEST_LENGTH];
     unsigned char digest2[SHA_DIGEST_LENGTH];
@@ -432,6 +448,7 @@ string FileManager::generate_Hash(string path, string hashAlgo){
 
     return ss.str();
 }
+
 string FileManager::genarate_SHA1(string path){
     stringstream ss;
     ifstream ifs(path, std::ifstream::binary);
@@ -459,6 +476,7 @@ string FileManager::genarate_SHA1(string path){
 
     return ss.str();
 }
+
 string FileManager::genarate_SHA256(string path){
     stringstream ss;
     ifstream ifs(path, std::ifstream::binary);
@@ -486,14 +504,6 @@ string FileManager::genarate_SHA256(string path){
 
     return ss.str();
 }
-
-
-
-
-
-
-
-
 
 //Permission related functions
 void Perm::calculatePerm(int val){
@@ -523,6 +533,7 @@ void Perm::calculatePerm(int val){
 		setPerm(3,0);
 	}
 }
+
 void Perm::calculatePerm(string path){
     std::error_code ec;
     fs::perms p = fs::status(path,ec).permissions();
@@ -550,7 +561,6 @@ void Perm::calculatePerm(string path){
     chmod = Global.X ? chmod + 1 : chmod + 0;
 }
 
-
 void Perm::setPerm(int mode,int set){
     bool R[8]={false,false,false,false,true,true,true,true};
     bool W[8]={false,false,true,true,false,false,true,true};
@@ -569,7 +579,6 @@ void Perm::setPerm(int mode,int set){
 		Global = P;
 	}
 }
-
 
 string Perm::getPermStr(){
     string str;
@@ -612,9 +621,6 @@ int Perm::calculatePerm(int oR, int oW, int oX, int grR, int grW, int grX, int g
 
 inline int Perm::getPermInt(){return chmod;}
 
-
-
-
 //TextFile Functions()
 
 void TextTool::getFileData(string path, bool addLineNo){
@@ -635,7 +641,6 @@ void TextTool::getFileData(string path, bool addLineNo){
     }
 	fs.close();
 }
-
 
 void TextTool::replaceLine(int lineNo, string lineStr){
     if(fileData.empty()){
@@ -685,17 +690,27 @@ void TextTool::removeLine(int lineNo){
     fileData.erase(fileData.begin() + lineNo);
 }
 
-string TextTool::getDispLine(string str){
-	int tmp1=str.find_first_of('\t');
-	while(tmp1!=-1){
-		str[tmp1]=' ';
-		str.insert(tmp1,"  ");
-		tmp1=str.find_first_of('\t');
-	}
-	return str;
+string TextTool::getLine(int lineNo){
+    if(lineNo < 0 ||
+       lineNo >= (int)fileData.size())
+    {
+        return "";
+    }
+
+    return fileData.at(lineNo);
 }
 
-string TextTool::getLine(int lineNo){return fileData[lineNo];}
+string TextTool::getDispLine(string str){
+    size_t pos;
+
+    while ((pos = str.find('\t'))
+            != string::npos)
+    {
+        str.replace(pos, 1, "   ");
+    }
+
+    return str;
+}
 
 bool TextTool::pushString(string path){
     fstream file;

@@ -1,5 +1,6 @@
 /*
 Copyright 2019 - 2020 SKYHAWK RECOVERY PROJECT
+Copyright 2020 - 2026 SkyHawk Recovery Project Reborn
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,6 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
 #include "gui/gui.hpp"
 #include "data.hpp"
 #include "partitions.hpp"
@@ -27,7 +29,6 @@ void SHRP::INIT(){
     genarateDate();
     handleLock();
 }
-
 
 void SHRP::printRecDetails(){
 	string tmp;
@@ -50,104 +51,64 @@ void SHRP::printRecDetails(){
 #endif
 }
 
-
-void SHRP::genarateDate(){
-	stringstream day;
-	string Current_Date,month,week,main_result,day_s;
-	time_t seconds = time(0);
-	struct tm *t = localtime(&seconds);
+void SHRP::genarateDate() {
+    time_t seconds = time(nullptr);
+    struct tm *t = localtime(&seconds);
 	{
 		string time;
 		DataManager::GetValue("tw_ls_time",time);
 		DataManager::SetValue("tw_ls_time",time.c_str());
 	}
-	int m=t->tm_mon+1;
-	int y=t->tm_year+1900;
-	int d=t->tm_mday;
-	static int tmp[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
-	y -= m < 3;
-	int w=( y + y / 4 - y / 100 + y / 400 + tmp[m - 1] + d) % 7;
-	switch(t->tm_mon+1){
-		case 1:month=" Jan";
-		break;
-		case 2:month=" Feb";
-		break;
-		case 3:month=" Mar";
-		break;
-		case 4:month=" Apr";
-		break;
-		case 5:month=" May";
-		break;
-		case 6:month=" Jun";
-		break;
-		case 7:month=" Jul";
-		break;
-		case 8:month=" Aug";
-		break;
-		case 9:month=" Sep";
-		break;
-		case 10:month=" Oct";
-		break;
-		case 11:month=" Nov";
-		break;
-		case 12:month=" Dec";
-		break;
-	}
-	switch(w){
-		case 0:week="Sun, ";
-		break;
-		case 1:week="Mon, ";
-		break;
-		case 2:week="Tue, ";
-		break;
-		case 3:week="Wed, ";
-		break;
-		case 4:week="Thu, ";
-		break;
-		case 5:week="Fri, ";
-		break;
-		case 6:week="Sat, ";
-		break;
-	}
-	day<<t->tm_mday;
-	day>>day_s;
-	main_result=week+day_s+month;
-	DataManager::SetValue("c_lock_screen_date",main_result);
+    if (!t) return;
+
+    static const char* months[] = {
+        "Jan","Feb","Mar","Apr","May","Jun",
+        "Jul","Aug","Sep","Oct","Nov","Dec"
+    };
+    static const char* wdays[] = {
+        "Sun, ","Mon, ","Tue, ","Wed, ","Thu, ","Fri, ","Sat, "
+    };
+
+    int m = t->tm_mon;
+    string result = wdays[t->tm_wday] + to_string(t->tm_mday) + " " + months[m];
+    DataManager::SetValue("c_lock_screen_date", result);
 }
 
+void SHRP::handleLock() {
+    std::ifstream f("/sdcard/SHRP/data/slts");
+    if (!f) f.open("/twres/slts");
+    char lockType = 0;
+    if (f && f >> lockType) {
+        f.close();
+    } else {
+        lockType = 69; // uhh i need to find out why it's locked when there's no such file
+    }
 
-void SHRP::handleLock(){
-	FILE *f;
-	char hello[50];
-	f = fopen("/sdcard/SHRP/data/slts","r");
-	if(f == NULL){
-		f = fopen("/twres/slts","r");
-	}
-	if(f != NULL){
-		fgets(hello, 50, f);
-		fclose(f);
-		if(hello[0] == '1'){
-			//Password Protected Recovery
-			DataManager::SetValue("c_target_destination","c_pass_capture");
-			DataManager::SetValue("recLockStatus",1);
-			property_set("shrp.lock","1");
-			PartitionManager.Disable_MTP();
-		}else if(hello[0] == '2'){
-			//Pattern Protected Recovery
-			DataManager::SetValue("c_target_destination","c_patt_capture");
-			DataManager::SetValue("recLockStatus",2);
-			property_set("shrp.lock","1");
-			PartitionManager.Disable_MTP();
-		}else{
-			//Unprotected Recovery
-			DataManager::SetValue("c_target_destination","main2");
-			DataManager::SetValue("recLockStatus",0);
-			property_set("shrp.lock","0");
-		}
-	}else{
-		DataManager::SetValue("c_target_destination","c_recBlocked");
-		DataManager::SetValue("recLockStatus",69);
-		property_set("shrp.lock","1");
-		PartitionManager.Disable_MTP();
-	}
+	PartitionManager.Disable_MTP();
+
+    const char* dest;
+    int lockStatus;
+    const char* shrpLockVal;
+    if (lockType == '1') {
+        dest = "c_pass_capture";
+        lockStatus = 1;
+        shrpLockVal = "1";
+    } else if (lockType == '2') {
+        dest = "c_patt_capture";
+        lockStatus = 2;
+        shrpLockVal = "1";
+    } else if (lockType == 69) {
+        dest = "c_recBlocked";
+        lockStatus = 69;
+        shrpLockVal = "1";
+    } else {
+        dest = "main2";
+        lockStatus = 0;
+        shrpLockVal = "0";
+		PartitionManager.Enable_MTP();
+    }
+
+    DataManager::SetValue("c_target_destination", dest);
+    DataManager::SetValue("recLockStatus", lockStatus);
+    property_set("shrp.lock", shrpLockVal);
 }
