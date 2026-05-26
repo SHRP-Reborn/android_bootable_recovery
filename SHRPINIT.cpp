@@ -15,6 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#include <fstream> 
 #include "gui/gui.hpp"
 #include "data.hpp"
 #include "partitions.hpp"
@@ -31,20 +32,20 @@ void SHRP::INIT(){
 }
 
 void SHRP::printRecDetails(){
-	string tmp;
 	gui_msg(Msg("|SKYHAWK RECOVERY PROJECT REBORN",0));
+
+	string tmp;
 	DataManager::GetValue("shrp_ver",tmp);
 	tmp="|Version - "+tmp;
 	gui_msg(Msg(tmp.c_str(),0));
-	if(DataManager::GetStrValue("is_Official") == "true"){
-		tmp="|Status - Official";
-	}else{
-		tmp="|Status - Unofficial";
-	}
+	
+	tmp = (DataManager::GetStrValue("is_Official") == "true") ? "|Status - Official" : "|Status - Unofficial";
 	gui_msg(Msg(tmp.c_str(),0));
+	
 	DataManager::GetValue("device_code_name",tmp);
 	tmp="|Device - "+tmp;
 	gui_msg(Msg(tmp.c_str(),0));
+
 #ifdef SHRP_BUILD_DATE
 	tmp="|Build - "+DataManager::GetStrValue("buildNo");
 	gui_msg(Msg(tmp.c_str(),0));
@@ -54,11 +55,6 @@ void SHRP::printRecDetails(){
 void SHRP::genarateDate() {
     time_t seconds = time(nullptr);
     struct tm *t = localtime(&seconds);
-	{
-		string time;
-		DataManager::GetValue("tw_ls_time",time);
-		DataManager::SetValue("tw_ls_time",time.c_str());
-	}
     if (!t) return;
 
     static const char* months[] = {
@@ -84,20 +80,21 @@ void SHRP::handleLock() {
         lockType = 69; // uhh i need to find out why it's locked when there's no such file
     }
 
-	PartitionManager.Disable_MTP();
-
     const char* dest;
     int lockStatus;
     const char* shrpLockVal;
     if (lockType == '1') {
+		PartitionManager.Disable_MTP();
         dest = "c_pass_capture";
         lockStatus = 1;
         shrpLockVal = "1";
     } else if (lockType == '2') {
+		PartitionManager.Disable_MTP();
         dest = "c_patt_capture";
         lockStatus = 2;
         shrpLockVal = "1";
     } else if (lockType == 69) {
+		PartitionManager.Disable_MTP();
         dest = "c_recBlocked";
         lockStatus = 69;
         shrpLockVal = "1";
@@ -105,7 +102,6 @@ void SHRP::handleLock() {
         dest = "main2";
         lockStatus = 0;
         shrpLockVal = "0";
-		PartitionManager.Enable_MTP();
     }
 
     DataManager::SetValue("c_target_destination", dest);
