@@ -1,5 +1,6 @@
 /*
 Copyright 2019 - 2020 SKYHAWK RECOVERY PROJECT
+Copyright 2020 - 2026 SkyHawk Recovery Project Reborn
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -40,6 +41,7 @@ class Express{
 	public:
 #ifdef SHRP_EXPRESS
 		static bool shrpResExp(string inPath,string outpath,bool display = true);
+		static void clearOldResources(string);
 		static void flushSHRP();
 		static void init();
 		static bool expBackup();

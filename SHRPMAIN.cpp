@@ -1,5 +1,6 @@
 /*
 Copyright 2019 - 2020 SKYHAWK RECOVERY PROJECT
+Copyright 2020 - 2026 SkyHawk Recovery Project Reborn
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -51,9 +52,7 @@ string JSON::getVar(string var,float val){
 }
 string JSON::genarateRAWJson(){
 #ifdef SHRP_BUILD_DATE
-	string build;
-	stringstream date(EXPAND(SHRP_BUILD_DATE));
-	date>>build;
+	string build = EXPAND(SHRP_BUILD_DATE);
 #else
 	string build="none";
 #endif
@@ -121,6 +120,12 @@ bool Express::shrpResExp(string inPath,string outPath,bool display){
 	return opStatus;
 }
 
+void Express::clearOldResources(string basePath) {
+    TWFunc::Exec_Cmd("cp -r " + basePath + "/etc/shrp/slts /tmp/", true, true);
+    TWFunc::Exec_Cmd("rm -r " + basePath + "/etc/shrp/*", true, true);
+    TWFunc::Exec_Cmd("cp -r /tmp/slts " + basePath + "/etc/shrp/", true, true);
+}
+
 void Express::flushSHRP(){
 	string basePath=DataManager::GetStrValue("shrpBasePath");
 
@@ -129,9 +134,7 @@ void Express::flushSHRP(){
 	if (!ret.envCreated) return;
 
 	if(TWFunc::Path_Exists(basePath + "/etc/shrp")){
-		TWFunc::Exec_Cmd("cp -r " + basePath + "/etc/shrp/slts /tmp/", true, true);
-		TWFunc::Exec_Cmd("rm -r " + basePath + "/etc/shrp/*", true, true);
-		TWFunc::Exec_Cmd("cp -r /tmp/slts " + basePath + "/etc/shrp/", true, true);
+		clearOldResources(basePath);
 	}
 	if(TWFunc::Path_Exists("/tmp/shrp")){
 		TWFunc::Exec_Cmd("rm -rf /tmp/shrp",true,true);
@@ -160,9 +163,7 @@ void Express::init(){
 			
 			if(TWFunc::Path_Exists(basePath + "/etc/shrp")){
 				LOGINFO("Deleting Old Resources\n");
-				TWFunc::Exec_Cmd("cp -r " + basePath + "/etc/shrp/slts /tmp/", true, true);
-				TWFunc::Exec_Cmd("rm -r " + basePath + "/etc/shrp/*", true, true);
-				TWFunc::Exec_Cmd("cp -r /tmp/slts " + basePath + "/etc/shrp/", true, true);
+				clearOldResources(basePath);
 				TWFunc::Exec_Cmd("cp -r /twres/version " + basePath + "/etc/shrp/", true, true);
 			}
 			if(TWFunc::Path_Exists("/tmp/shrp")){
@@ -265,7 +266,7 @@ envRet Express::provideEnvironment(bool forceMount, string inPath) {
 	string storePath = DataManager::GetStrValue("shrpBasePath") + "/etc/shrp";
 	envRet ret;
 #ifdef SHRP_EXPRESS_USE_DATA
-	bool data_mounted = PartitionManager.Is_Mounted_By_Path(storePath) ? true : false;
+	bool data_mounted = PartitionManager.Is_Mounted_By_Path(storePath);
 	
 	if (!data_mounted) return ret;
 
@@ -352,9 +353,8 @@ bool Hasher::LockPassInit(string str){
 
 bool Hasher::isPassCorrect(){
 	chash = create_sha256(arg.c_str() + fsalt);
-	std::string givpw=lock_pass+fsalt+chash; // reconstructed type + reconstructed salt + generated hash
-	std::string recpw=lock_pass+fsalt+fhash; // reconstructed type + reconstructed salt + reconstructed hash
-	return givpw==recpw ? true : false;
+	std::string prefix = lock_pass + fsalt;
+	return (prefix + chash) == (prefix + fhash);
 }
 
 string Hasher::doHash(string str){
@@ -384,7 +384,7 @@ string Hasher::create_salt( size_t length ){
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     thread_local static std::mt19937 rg{std::random_device{}()};
-    thread_local static std::uniform_int_distribution<std::string::size_type> pick(0, sizeof(chrs) - 2);
+    thread_local static std::uniform_int_distribution<std::string::size_type> pick(0, chrs.size() - 1);
 
     std::string s;
 
@@ -400,55 +400,24 @@ string Hasher::create_salt( size_t length ){
 
 //SIG Helpers
 float roundSize(float var) {
-	float value = (int)(var * 100 + .5);
-	return(float)value / 100;
+	return roundf(var * 100.0f) / 100.0f;
 }
-void process_space(int size,int free,storageInfo storage){
-	string partition,temp,tmp;
-	int p_val_usage=0;
-	float size_g,free_g;
-	int used = size-free;
-	if(size>0){
-		if(free>=1024){
-			free_g=(float)free/1024;
-			free_g=roundSize(free_g);
-			{
-			stringstream buff;
-			buff<<free_g;
-			buff>>temp;
-			tmp=temp+" GB free of ";
-			}
-		}else{
-			{
-			stringstream buff;
-			buff<<free;
-			buff>>temp;
-			tmp=temp+" MB free of ";
-			}
-		}
-		if(size>=1024){
-			size_g=(float)size/1024;
-			size_g=roundSize(size_g);
-			{
-			stringstream buff;
-			buff<<size_g;
-			buff>>temp;
-			tmp=tmp+temp+" GB";
-			}
-		}else{
-			{
-			stringstream buff;
-			buff<<size;
-			buff>>temp;
-			tmp=temp;
-			tmp=tmp+temp+" MB";
-			}
-		}
-		p_val_usage=used*100/size;
-	}
-	DataManager::SetValue(storage.freeStrVar,(size<=0 ? "Unavailable" : tmp.c_str()));
-	//DataManager::SetValue(storage.freePercentageVar,(size<=0 ? 0 : p_val_usage));
-	DataManager::SetValue(storage.freePercentageVar,(size<=0 ? 0 : (440 * p_val_usage /100)));//440 is the width of bar
+void process_space(int size, int free, storageInfo storage) {
+    ostringstream info;
+    if (size <= 0) {
+        info << "Unavailable";
+    } else {
+        if (free >= 1024)
+            info << fixed << setprecision(1) << (free / 1024.0f) << " GB free of ";
+        else
+            info << free << " MB free of ";
+        if (size >= 1024)
+            info << fixed << setprecision(1) << (size / 1024.0f) << " GB";
+        else
+            info << size << " MB";
+    }
+    DataManager::SetValue(storage.freeStrVar, info.str());
+    DataManager::SetValue(storage.freePercentageVar, size <= 0 ? 0 : (440 * (size - free) / size));
 }
 
 

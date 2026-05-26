@@ -1,5 +1,6 @@
 /*
 Copyright 2019 - 2020 SKYHAWK RECOVERY PROJECT
+Copyright 2020 - 2026 SkyHawk Recovery Project Reborn
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23,6 +24,9 @@ limitations under the License.
 
 #include "SHRPTOOLS.hpp"
 
+#include "filesystem.hpp"
+namespace fs = ghc::filesystem;
+
 //SHRP minUtils
 bool minUtils::compare(string str1,string str2){
     transform(str1.begin(),str1.end(),str1.begin(), ::tolower);
@@ -31,50 +35,43 @@ bool minUtils::compare(string str1,string str2){
 }
 
 bool minUtils::isFileEditable(string fileExtension){
-	vector<string> extensions = {".txt", ".xml", ".prop", ".sh", ".conf", ".json", ".cfg", ".rc", ".d", ".md"};
-
-    if(fileExtension == "" || fileExtension == "none") return true;
-
-	for(auto it = extensions.begin(); it < extensions.end(); it++){
-		if(compare(fileExtension, *it)) return true;
-	}
+	static const std::vector<std::string> extensions = {
+        ".txt", ".xml", ".prop", ".sh", ".conf", ".json", ".cfg", ".rc", ".d", ".md"
+    };
+    if (fileExtension.empty() || fileExtension == "none") return true;
+    for (const auto& ext : extensions) {
+        if (compare(fileExtension, ext)) return true;
+    }
     return false;
 }
 
 bool minUtils::find(std::string str,std::string sub){
-	if(str.find(sub) == string::npos){
-		return false;
-	}else{
-		return true;
-	}
+	return str.find(sub) != std::string::npos;
 }
 bool minUtils::find(std::string str,std::string sub,int dummy){
-	transform(str.begin(),str.end(),str.begin(), ::tolower);
-	transform(sub.begin(),sub.end(),sub.begin(), ::tolower);
-	if(str.find(sub) == string::npos){
-		return false;
-	}else{
-		return true;
-	}
+	auto it = std::search(str.begin(), str.end(), sub.begin(), sub.end(),
+        [](char a, char b) { return ::tolower((unsigned char)a) == ::tolower((unsigned char)b); });
+    return it != str.end();
 }
 
-void minUtils::remountSystem(bool display){
-	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path())){
-	  	PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(),false);
-	  	unlink("/system");
-		mkdir("/system", 0755);
-	}
-	TWFunc::Exec_Cmd("mount -w "+PartitionManager.Get_Android_Root_Path(),display);
-	if(display){
-		gui_msg("remount_system_rw=[i] Remounted system as R/W!");
-	}
+void minUtils::remountSystem(bool display) {
+    std::string root = PartitionManager.Get_Android_Root_Path();
+    if (PartitionManager.Is_Mounted_By_Path(root)) {
+        PartitionManager.UnMount_By_Path(root, false);
+    }
+    struct stat st;
+    if (lstat("/system", &st) == 0 && S_ISLNK(st.st_mode)) {
+        unlink("/system");
+    }
+    if (access("/system", F_OK) != 0) {
+        mkdir("/system", 0755);
+    }
+    TWFunc::Exec_Cmd("mount -w " + root, display);
+    if (display) {
+        gui_msg("remount_system_rw=[i] Remounted system as R/W!");
+    }
 }
 
 string minUtils::getExtension(string str,string arg){
-	int dotPos=str.find_last_of('.');
-	if(dotPos == -1 || dotPos== (int) str.length()-1){
-		return "none";
-	}else{
-		return (arg+str.substr(dotPos+1, str.length() - dotPos));
-	}
+	return fs::path(str).extension().string();
 }
