@@ -2806,7 +2806,7 @@ int GUIAction::set_lock(std::string arg){
 		}
 #ifndef SHRP_EXPRESS
 #ifdef SHRP_AB
-#ifdef TW_HAS_RECOVERY_PARTITION
+#ifdef SHRP_HAS_RECOVERY_PARTITION
 		TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB_REC.sh;");
 #else
 		TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB.sh;");
@@ -2838,7 +2838,7 @@ int GUIAction::reset_lock(std::string arg __unused){
 		fclose(f);
 #ifndef SHRP_EXPRESS
 #ifdef SHRP_AB
-#ifdef TW_HAS_RECOVERY_PARTITION
+#ifdef SHRP_HAS_RECOVERY_PARTITION
 		TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB_REC.sh;");
 #else
 		TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB.sh;");
@@ -2879,7 +2879,7 @@ int GUIAction::c_repack(std::string arg __unused){
 			TWFunc::Exec_Cmd("sh /twres/scripts/repack.sh;");
 #endif	
 #ifdef SHRP_AB
-#ifdef TW_HAS_RECOVERY_PARTITION
+#ifdef SHRP_HAS_RECOVERY_PARTITION
 			string recBlock = DataManager::GetStrValue("shrp_rec");
 			recBlock = recBlock != "N/A" ? recBlock : "/dev/block/bootdevice/by-name/recovery";
 
@@ -3014,7 +3014,7 @@ int GUIAction::themeInit(std::string arg __unused){
 	if (TWFunc::Exec_Cmd("cp -r /twres /tmp/bak/;") != 0) {err = true;}
 #ifndef SHRP_EXPRESS
 #ifdef SHRP_AB
-#ifdef TW_HAS_RECOVERY_PARTITION
+#ifdef SHRP_HAS_RECOVERY_PARTITION
 	if (TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB_REC.sh;") != 0) {
 		err=true;
 	}
