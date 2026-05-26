@@ -19,13 +19,21 @@
 				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%file_selector_default_w%" h="1100"/>
 				<icon selected="fileImg2" unselected="fileImg2"/>
 				<data name="shrpTweaks"/>
+				<listitem name="{@fix_recovery_loop=Fix Recovery Bootloop}">
+					<condition var1="tw_has_boot_slots" var2="1"/>
+					<condition var1="tw_has_repack_tools" var2="1"/>
+					<condition var1="tw_uses_initramfs" var2="1"/>
+					<actions>
+						<action function="set">tw_back=c_addons</action>
+						<action function="set">tw_action=fixabrecoverybootloop</action>
+						<action function="set">tw_text1={@fix_recovery_loop_confirm=Fix Recovery Bootloop?}</action>
+						<action function="set">tw_action_text1={@fixing_recovery_loop=Fixing Recovery Bootloop...}</action>
+						<action function="set">tw_complete_text1={@fix_recovery_loop_complete=Fix Recovery Bootloop Complete}</action>
+						<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
 			</listbox>
-
-			<button>
-				<placement x="860" y="%rndPos105%"/>
-				<image resource="c_dashboard_addon"/>
-				<action function="page">c_addons_native</action>
-			</button>
 
 			<action>
 				<actions>
@@ -55,53 +63,6 @@
 			</action>
 		</page>
 
-		<page name="c_addons_native">
-			<template name="navCommon"/>
-			<template name="c_status_bar"/>
-
-			<text style="pageTitle">
-				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
-				<text>{@c_tweaks=Tweaks}</text>
-			</text>
-			<text style="pageSubTitle">
-				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
-				<text>{@c_tweaks_info=Collection of tweaks}</text>
-			</text>
-
-
-			<listbox style="customListbox">
-				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%file_selector_default_w%" h="1100"/>
-				<icon selected="fileImg2" unselected="fileImg2"/>
-				<listitem name="{@fix_recovery_loop=Fix Recovery Bootloop}">
-					<condition var1="tw_has_boot_slots" var2="1"/>
-					<condition var1="tw_has_repack_tools" var2="1"/>
-					<condition var1="tw_uses_initramfs" var2="1"/>
-					<actions>
-						<action function="set">tw_back=c_addons_native</action>
-						<action function="set">tw_action=fixabrecoverybootloop</action>
-						<action function="set">tw_text1={@fix_recovery_loop_confirm=Fix Recovery Bootloop?}</action>
-						<action function="set">tw_action_text1={@fixing_recovery_loop=Fixing Recovery Bootloop...}</action>
-						<action function="set">tw_complete_text1={@fix_recovery_loop_complete=Fix Recovery Bootloop Complete}</action>
-						<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-						<action function="page">confirm_action</action>
-					</actions>
-				</listitem>
-			</listbox>
-
-
-			<action>
-				<touch key="back"/>
-				<actions>
-					<action function="page">c_refresh</action>
-				</actions>
-			</action>
-			<action>
-				<touch key="home"/>
-				<actions>
-					<action function="page">c_refresh</action>
-				</actions>
-			</action>
-		</page>
 		<page name="tweakConfirm">
 			<template name="overlayPage"/>
 
