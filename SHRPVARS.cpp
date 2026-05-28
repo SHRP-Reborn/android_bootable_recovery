@@ -1,5 +1,6 @@
 /*
 Copyright 2019 - 2020 SKYHAWK RECOVERY PROJECT
+Copyright 2020 - 2026 SkyHawk Recovery Project Reborn
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -752,8 +753,8 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
     mData->SetValue("permOwnerW", 0);
     mData->SetValue("permOwnerX", 0);
     mData->SetValue("permGroupR", 0);
-    mData->SetValue("permGroupR", 0);
-    mData->SetValue("permGroupR", 0);
+    mData->SetValue("permGroupW", 0);
+    mData->SetValue("permGroupX", 0);
     mData->SetValue("permGlobalR", 0);
     mData->SetValue("permGlobalW", 0);
     mData->SetValue("permGlobalX", 0);
@@ -762,8 +763,8 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
     mData->SetValue("NewpermOwnerW", 0);
     mData->SetValue("NewpermOwnerX", 0);
     mData->SetValue("NewpermGroupR", 0);
-    mData->SetValue("NewpermGroupR", 0);
-    mData->SetValue("NewpermGroupR", 0);
+    mData->SetValue("NewpermGroupW", 0);
+    mData->SetValue("NewpermGroupX", 0);
     mData->SetValue("NewpermGlobalR", 0);
     mData->SetValue("NewpermGlobalW", 0);
     mData->SetValue("NewpermGlobalX", 0);
