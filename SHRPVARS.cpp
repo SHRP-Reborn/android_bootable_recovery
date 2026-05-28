@@ -65,7 +65,6 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
 	mData->SetValue("isThemeFile", "0");
 	mData->SetValue("chFolder", "0");
 	//SHRP_PERSISTED_VARS
-	mPersist->SetValue("c_temp2", "pepe");
 	mPersist->SetValue("c_dateview", "0");
 	mPersist->SetValue("c_devMode", "0");
 	mPersist->SetValue("c_shrpUpdate", "0");
@@ -118,11 +117,11 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
 
 #ifdef SHRP_FLASH
 	mConst->SetValue("has_flashlight", EXPAND(SHRP_FLASH));
-	mData->SetValue("c_flashlight_status", "0");
 #else
 	mConst->SetValue("has_flashlight", "0");
-	mData->SetValue("c_flashlight_status", "0");
 #endif
+	mData->SetValue("c_flashlight_status", "0");
+
 
 #ifdef SHRP_EXCLUDE_MAGISK_FLASH
 	mConst->SetValue("exclude_magisk_flash", "0");
@@ -659,15 +658,11 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
     // mConst->SetValue("rndPos128", "1920");
 
 
-    mData->SetValue("testOperationToogle", "0");
-    mData->SetValue("testOperation", "None");
-    mData->SetValue("testLoadToggle", "0");
     mData->SetValue("mSelectedPathList", "");
     mData->SetValue("extenPathList", "");
     mData->SetValue("selectionHandle", "0");
 
     mData->SetValue("passNotMatched", "0");
-    mData->SetValue("autoOverlayHandler", "0");
 
     mData->SetValue("shrpTweakName", "");
     mData->SetValue("shrpTweakInfo", "");
