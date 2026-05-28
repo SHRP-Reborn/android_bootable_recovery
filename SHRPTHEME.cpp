@@ -1,5 +1,6 @@
 /*
 Copyright 2019 - 2020 SKYHAWK RECOVERY PROJECT
+Copyright 2020 - 2026 SkyHawk Recovery Project Reborn
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -130,16 +131,17 @@ bool ThemeManager::applyThemeResouces(){
 
 
     if(DataManager::GetStrValue("extern_accentColor") != DataManager::GetStrValue("accentColor") && getColor("accentColor") != "NULL"){
-        if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/accentResources/"+getColor("accentColor")+"/*.png "+box+";") != 0){ret=false;}
+        if(FileManager::copy(themeBase+"/accentResources/"+getColor("accentColor")+"/*.png", box, true) != 0){ret=false;}
     }
     if(DataManager::GetStrValue("extern_backgroundColor") != DataManager::GetStrValue("backgroundColor") && getColor("backgroundColor") != "NULL" && ret){
-        if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/backgroundResources/"+getColor("backgroundColor")+"/*.png "+box+";") != 0){ret=false;}
+        if(FileManager::copy(themeBase+"/backgroundResources/"+getColor("backgroundColor")+"/*.png", box, true) != 0){ret=false;}
     }
 
     string bType,bClr;
+    bool darkColor = isColorDark(DataManager::GetStrValue("backgroundColor"));
     bType = DataManager::GetIntValue("batteryType") == 1 ? "/default" : "/circle";
-    bClr = !isColorDark(DataManager::GetStrValue("backgroundColor")) ? "/light" : "/dark";
-    if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/batteryResources"+bType+bClr+"/*.png "+box+";") != 0){ret=false;}
+    bClr = !darkColor ? "/light" : "/dark";
+    if(FileManager::copy(themeBase+"/batteryResources"+bType+bClr+"/*.png", box, true) != 0){ret=false;}
 
 
     if(ret){
@@ -159,7 +161,7 @@ bool ThemeManager::applyThemeResouces(){
                 break;
         }
         if(getColor("navbarColor") != "NULL")
-            if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/navigationResources/"+tmp+"/"+getColor("navbarColor")+"/*.png "+box+";") != 0){ret=false;}
+            if(FileManager::copy(themeBase+"/navigationResources/"+tmp+"/"+getColor("navbarColor")+"/*.png", box, true) != 0){ret=false;}
     }
 
 
@@ -186,12 +188,12 @@ bool ThemeManager::applyThemeResouces(){
                 tmp = "NULL";
         }
         if(tmp != "NULL"){
-            if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/dashboardResources/"+tmp+"/*.png "+box+";") != 0){ret=false;}
+            if(FileManager::copy(themeBase+"/dashboardResources/"+tmp+"/*.png", box, true) != 0){ret=false;}
         }
     }
 
     if(DataManager::GetStrValue("extern_dashboardTextColor") != DataManager::GetStrValue("dashboardTextColor") && getColor("dashboardTextColor") != "NULL" && ret){
-        if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/dashboardResources/dashboardBackground/"+getColor("dashboardTextColor")+"/*.png "+box+";") != 0){ret=false;}
+        if(FileManager::copy(themeBase+"/dashboardResources/dashboardBackground/"+getColor("dashboardTextColor")+"/*.png", box, true) != 0){ret=false;}
     }
 
     if(DataManager::GetStrValue("extern_roundedcornerType") != DataManager::GetStrValue("roundedcornerType") && DataManager::GetIntValue("roundedCornerEnabled") == 1 && ret){
@@ -207,12 +209,11 @@ bool ThemeManager::applyThemeResouces(){
                 tmp = "type_3";
                 break;
         }
-        if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/roundedCornerResources/"+tmp+"/*.png "+box+";") != 0){ret=false;}
+        if(FileManager::copy(themeBase+"/roundedCornerResources/"+tmp+"/*.png", box, true) != 0){ret=false;}
     }
 
     //Dynamic Resources
-    bool darkColor = isColorDark(DataManager::GetStrValue("backgroundColor"));
-    if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/dynamicResources/"+(darkColor ? "light" : "dark")+"/*.png "+box+";") != 0){ret=false;}
+    if(FileManager::copy(themeBase+"/dynamicResources/"+(darkColor ? "light" : "dark")+"/*.png", box, true) != 0){ret=false;}
 
     return ret;
 }
