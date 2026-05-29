@@ -24,6 +24,7 @@ class ThemeManager{
 
         //Default Functions
         int hexToInt(string str); //Convert Hex value to int for processing the color val
+        bool copyPngs(string from, string to); //Copy png files from one location to another
         bool isColorDark(string str);
         string getColor(string str);
         string get_subBackgroundColor();
