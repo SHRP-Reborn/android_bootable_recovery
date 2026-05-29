@@ -77,7 +77,6 @@
 				<text>{@part_sd_undo=This action cannot be undone!}</text>
 			</textbox>
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos22%"/>
 				<text>{@file_system=File System:}</text>
@@ -86,7 +85,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
 				<text>%tw_sdpart_file_system%</text>
 			</text>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos37%"/>
@@ -111,8 +109,6 @@
 				<action function="addsubtract">tw_sdext_size+256</action>
 			</button>
 
-			
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos50%"/>
 				<text>{@part_sd_swap_sz=Swap Size:}</text>
@@ -121,8 +117,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos55%"/>
 				<text>%tw_swap_size%</text>
 			</text>
-
-
 
 			<button style="symbolBtn">
 				<placement x="585" y="-20" yref="%rPos55%" yop="+" w="150" h="110"/>
@@ -137,7 +131,6 @@
 				<text>+</text>
 				<action function="addsubtract">tw_swap_size+256</action>
 			</button>
-
 
 			<button style="c_circle4">
 				<placement x="860" y="%rndPos81%"/>
@@ -167,7 +160,6 @@
 					<action function="page">action_page</action>
 				</actions>
 			</button>
-
 
 			<action>
 				<touch key="home"/>

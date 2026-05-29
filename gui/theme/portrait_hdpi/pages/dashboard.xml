@@ -10,14 +10,10 @@
 				<image resource="SKYHAWK"/>
 			</image>
 
-
-
 			<text style="dashboardHeader">
 				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
 				<text>{@c_essentials=Essentials}</text>
 			</text>
-
-
 
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
@@ -47,9 +43,6 @@
 				</actions>
 			</button>
 
-
-
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<placement x="343" y="%rPos25%"/>
@@ -68,9 +61,6 @@
 				<action function="page">wipe</action>
 			</button>
 
-
-
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<placement x="587" y="%rPos25%"/>
@@ -87,10 +77,6 @@
 				<text>{@backup_btn=Backup}</text>
 				<action function="page">backup</action>
 			</button>
-
-
-
-
 
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
@@ -109,10 +95,6 @@
 				<action function="page">restore</action>
 			</button>
 
-
-
-
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<placement x="99" y="%rPos43%"/>
@@ -128,9 +110,6 @@
 				<text>{@mount_btn=Mount}</text>
 				<action function="page">mount</action>
 			</button>
-
-
-
 
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
@@ -148,8 +127,6 @@
 				<action function="page">fileManager</action>
 			</button>
 
-
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<placement x="587" y="%rPos43%"/>
@@ -166,8 +143,6 @@
 				<action function="page">terminalcommand</action>
 			</button>
 
-
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<placement x="831" y="%rPos43%"/>
@@ -183,15 +158,6 @@
 				<text>{@advanced_hdr=Advanced}</text>
 				<action function="page">advanced</action>
 			</button>
-
-
-
-
-
-
-
-
-
 
 			<text style="dashboardHeader">
 				<placement x="%c_hawk_base_column%" y="%rPos60%"/>
@@ -220,8 +186,6 @@
 				</actions>
 			</button>
 
-
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<placement x="343" y="%rPos68%"/>
@@ -244,8 +208,6 @@
 				</actions>
 			</button>
 
-
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<placement x="587" y="%rPos68%"/>
@@ -261,8 +223,6 @@
 				<text>{@c_tweaks=Tweaks}</text>
 				<action function="page">c_addons</action>
 			</button>
-
-
 
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
@@ -280,9 +240,6 @@
 				<action function="page">settings</action>
 			</button>
 
-
-
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<placement x="99" y="%rPos86%"/>
@@ -298,7 +255,6 @@
 				<text>{@c_security=Security}</text>
 				<action function="page">securityDashboard</action>
 			</button>
-
 
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
@@ -316,7 +272,6 @@
 				<action function="page">settings_language</action>
 			</button>
 
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<placement x="587" y="%rPos86%"/>
@@ -332,7 +287,6 @@
 				<text>{@reboot_btn=Reboot}</text>
 				<action function="overlay">reboot</action>
 			</button>
-
 
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>

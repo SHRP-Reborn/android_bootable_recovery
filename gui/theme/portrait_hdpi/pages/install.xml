@@ -150,7 +150,6 @@
 				<action function="page">c_flash_zip_confirmer</action>
 			</button>
 
-
 			<action>
 				<touch key="back"/>
 				<actions>
@@ -232,7 +231,6 @@
 
 			<template name="progress_bar"/>
 
-
 			<action>
 				<condition var1="tw_operation_state" var2="1"/>
 				<action function="page">flash_done</action>
@@ -284,7 +282,6 @@
 					<action function="overlay">c_flash_img_confirmer</action>
 				</actions>
 			</button>
-
 
 			<action>
 				<touch key="back"/>

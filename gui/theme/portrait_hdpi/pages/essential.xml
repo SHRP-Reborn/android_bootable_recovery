@@ -19,7 +19,6 @@
 				<listtype name="storage"/>
 			</partitionlist>
 
-
 			<action>
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
@@ -45,7 +44,6 @@
 				<placement x="113" y="1230"/>
 				<text>Controls</text>
 			</text>
-
 
 			<button>
 				<placement x="113" y="1327"/>
@@ -87,7 +85,6 @@
 				<image resource="controlFlashOff"/>
 				<action function="flashlight"/>
 			</button>
-
 
 			<slidervalue>
 				<condition var1="tw_has_brightnesss_file" var2="1"/>

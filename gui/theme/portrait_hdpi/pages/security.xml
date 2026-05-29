@@ -24,7 +24,6 @@
 				<data variable="dummy"/>
 			</checkbox>
 
-			
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
 				<text>{@currProtection=Current protection}</text>
@@ -47,7 +46,6 @@
 				<font resource="extraLargeBold" color="%secondaryColor%"/>
 				<text>{@c_pattern=Pattern}</text>
 			</text>
-
 
 			<button>
 				<condition var1="recLockStatus" op="=" var2="0"/>
@@ -105,7 +103,6 @@
 				<text>{@c_password=Password}</text>
 			</text>
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@c_enter_pass=Enter Password}</text>
@@ -162,7 +159,6 @@
 				<text>{@c_password=Password}</text>
 			</text>
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@enter_pass_again=Enter Password Again}</text>
@@ -216,7 +212,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
 				<text>{@c_password=Password}</text>
 			</text>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>

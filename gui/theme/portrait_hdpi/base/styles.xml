@@ -175,8 +175,6 @@
 			<font resource="extraLargeBold" color="%accentColor%"/>
 		</style>
 
-
-		
 		<style name="permBtnEnabled">
 			<font resource="largeBold" color="%backgroundColor%"/>
 			<image resource="permButton"/>
@@ -192,7 +190,5 @@
 		<style name="dashboardHeader">
 			<font resource="largeBold" color="%accentColor%"/>
 		</style>
-
 	</styles>
 </recovery>
-

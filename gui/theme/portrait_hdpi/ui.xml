@@ -42,7 +42,6 @@
 		<xmlfile name="portrait.xml"/>
 	</include>
 
-
 	<mousecursor>
 		<placement w="15" h="15"/>
 		<background color="#FFFF00FF" resource="cursor"/>

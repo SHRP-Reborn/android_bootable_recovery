@@ -23,7 +23,6 @@
 				<text>{@restore_sel_store_hdr=Select Backup from %tw_storage_display_name% (%tw_storage_free_size% MB)}</text>
 			</text>
 
-
 			<fileselector style="c_restore">
 				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%file_selector_default_w%" h="%revPos97%"/>
 				<filter folders="1" files="1" nav="0" extn=".ab"/>
@@ -106,7 +105,6 @@
 					<action function="overlay">select_storage</action>
 				</actions>
 			</button>
-
 
 			<action>
 				<condition var1="tw_restore" op="modified"/>
@@ -200,7 +198,6 @@
 
 			<template name="keyboardtemplate"/>
 
-
 			<action>
 				<touch key="home"/>
 				<action function="page">c_refresh</action>
@@ -263,8 +260,6 @@
 				<text>{@restore_backup_date=Backup made on %tw_restore_file_date%}</text>
 			</text>
 
-
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@name=Name:}</text>
@@ -282,8 +277,6 @@
 					<action function="page">renamebackup</action>
 				</actions>
 			</button>
-
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos31%"/>
@@ -306,8 +299,6 @@
 				<text>{@restore_enable_digest_chk=Digest Verification}</text>
 				<data variable="tw_skip_digest_check"/>
 			</checkbox>
-
-
 
 			<button>
 				<placement x="860" y="%rndPos93%"/>
@@ -352,8 +343,6 @@
 				<text>{@rename_backup_hdr=Rename Backup}</text>
 			</text>
 
-
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@name=Name:}</text>
@@ -394,8 +383,6 @@
 				<placement x="60" y="100" yref="%rPos24%" yop="+"/>
 				<text>{@backup_name_exists=A backup with that name already exists!}</text>
 			</text>
-
-
 
 			<template name="keyboardtemplate"/>
 			<action>
@@ -477,7 +464,6 @@
 				<text>{@restore_with_pin2=PIN should be disabled before restore}</text>
 				<text>{@restore_pin=Restore While PIN Enabled?}</text>
 			</textbox>
-
 
 			<button>
 				<placement x="860" y="%rndPos105%"/>

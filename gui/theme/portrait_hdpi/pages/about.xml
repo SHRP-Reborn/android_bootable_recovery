@@ -28,7 +28,6 @@
 				<data variable="dummy"/>
 			</checkbox>
 
-
 			<checkbox>
 				<condition var1="shrp_ver_status" op="=" var2="Beta"/>
 				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
@@ -79,10 +78,6 @@
 				</listitem>
 			</listbox>
 			
-			
-			
-			
-			
 			<!--image>
 				<placement x="135" y="75"/>
 				<image resource="c_logo"/>
@@ -108,8 +103,6 @@
 				<action function="page">c_refresh</action>
 			</action>
 		</page>
-
-
 
 		<page name="shrpCredits">
 			<template name="navCommon"/>
@@ -144,6 +137,9 @@
 			<listbox style="scrolllist">
 				<placement x="%c_hawk_base_column%" y="%rPos45%" w="%file_selector_default_w%" h="750"/>
 				<icon selected="shrpCredits" unselected="shrpCredits"/>
+				<listitem name="remtrik">
+					<data variable="dummy"/>
+				</listitem>
 				<listitem name="epicX">
 					<data variable="dummy"/>
 				</listitem>
@@ -185,7 +181,6 @@
 					<data variable="dummy"/>
 				</listitem>
 			</listbox>
-
 
 			<action>
 				<touch key="back"/>

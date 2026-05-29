@@ -216,8 +216,6 @@
 				</listitem>
 			</listbox>
 
-
-
 			<button>
 				<placement x="860" y="1450"/>
 				<condition var1="av_express" var2="1"/>
@@ -261,7 +259,6 @@ rm -r /tmp/bak;
 				</actions>
 			</action>
 		</page>
-
 
 		<page name="colorPanel">
 			<template name="overlayPage"/>
@@ -368,9 +365,6 @@ rm -r /tmp/bak;
 				<action function="overlay"/>
 			</button>
 
-
-
-
 			<button>
 				<placement x="53" y="1642"/>
 				<image resource="colorYellow"/>
@@ -452,10 +446,6 @@ rm -r /tmp/bak;
 				<placement x="927" y="1642"/>
 				<image resource="colorWhite"/>
 			</button>
-
-
-
-
 
 			<!--button style="cnfrmBtn">
 				<placement x="700" y="%rndPos115%" w="310" h="110"/>
@@ -571,8 +561,6 @@ rm -r /tmp/bak;
 			</button>
 		</page>
 
-
-
 		<page name="showHidePanel">
 			<template name="navBackOnly"/>
 			<template name="c_status_bar"/>
@@ -627,7 +615,6 @@ rm -r /tmp/bak;
 				</actions>
 			</action>
 		</page>
-
 
 		<page name="moreCustomizations">
 			<template name="navBackOnly"/>

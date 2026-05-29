@@ -84,7 +84,6 @@
 				</actions>
 			</button>
 
-
 			<action>
 				<touch key="power"/>
 				<action function="togglebacklight"/>

@@ -13,7 +13,6 @@
 				<text>%tw_text1%</text>
 			</text>
 
-
 			<button>
 				<condition var1="c_magisk_status" op="=" var2="1"/>
 				<image resource="c_ok"/>
@@ -71,7 +70,6 @@
 				<text>%tw_text4%</text>
 			</textbox>
 
-
 			<button>
 				<image resource="c_ok"/>
 				<placement x="860" y="%rndPos105%"/>
@@ -105,7 +103,6 @@
 
 			<template name="c_console_custom"/>
 			<template name="progress_bar"/>
-
 
 			<button>
 				<condition var1="tw_has_cancel" var2="1"/>
@@ -148,7 +145,6 @@
 
 			<template name="c_console_custom"/>
 			<template name="progress_bar"/>
-
 
 			<action>
 				<condition var1="tw_operation_state" var2="1"/>
@@ -228,7 +224,6 @@
 				<action function="page">copylog</action>
 			</button>
 
-
 			<button>
 				<placement x="370" y="%rndPos102%"/>
 				<image resource="actionRebootSystem"/>
@@ -254,7 +249,6 @@
 				</actions>
 			</button>
 
-
 			<button>
 				<placement x="610" y="%rndPos102%"/>
 				<image resource="actionRebootRecovery"/>
@@ -279,7 +273,6 @@
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
-
 
 			<button>
 				<placement x="850" y="%rndPos102%"/>

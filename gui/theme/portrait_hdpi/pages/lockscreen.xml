@@ -28,7 +28,6 @@
 				<action function="overlay"/>
 			</button>
 
-
 			<template name="c_status_bar"/>
 
 			<!--FlashLight Icon-->
@@ -50,7 +49,6 @@
 					<action function="flashlight"/>
 				</actions>
 			</button>
-
 
 			<action>
 				<touch key="power+voldown"/>

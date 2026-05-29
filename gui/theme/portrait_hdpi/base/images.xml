@@ -142,8 +142,6 @@
 		<image name="c_usersRadioOn" filename="c_usersRadioOn" retainaspect="1"/>
 		<image name="c_usersRadioOff" filename="c_usersRadioOff" retainaspect="1"/>
 
-
-
 		<!--New Images-->
 		<image name="actionCopyLog" filename="actionCopyLog" retainaspect="1"/>
 		<image name="actionWipe" filename="actionWipe" retainaspect="1"/>
@@ -156,12 +154,10 @@
 		<image name="fileImg2" filename="fileImg2" retainaspect="1"/>
 		<image name="fileTheme" filename="fileTheme" retainaspect="1"/>
 
-
 		<image name="controlFlashOff" filename="controlFlashOff" retainaspect="1"/>
 		<image name="controlFlashOn" filename="controlFlashOn" retainaspect="1"/>
 		<image name="controlLock" filename="controlLock" retainaspect="1"/>
 		<image name="sliderDot" filename="sliderDot"/>
-
 
 		<image name="goodSign" filename="goodSign" retainaspect="1"/>
 		<image name="warningSign" filename="warningSign" retainaspect="1"/>
@@ -230,7 +226,6 @@
 		<image name="deviceIco" filename="deviceIco" retainaspect="1"/>
 		<image name="globeIco" filename="globeIco" retainaspect="1"/>
 
-
 		<image name="actionCopy" filename="actionCopy" retainaspect="1"/>
 		<image name="actionCreateFolder" filename="actionCreateFolder" retainaspect="1"/>
 		<image name="actionCut" filename="actionCut" retainaspect="1"/>
@@ -264,7 +259,6 @@
 		<image name="fileMangerSettings" filename="fileMangerSettings" retainaspect="1"/>
 		<image name="slotPanel" filename="slotPanel"/>
 
-
 		<image name="officialBuild" filename="officialBuild" retainaspect="1"/>
 		<image name="unofficialBuild" filename="unofficialBuild" retainaspect="1"/>
 		<image name="betaBuild" filename="betaBuild" retainaspect="1"/>
@@ -277,7 +271,6 @@
 		<image name="deviceSettingsDisabled" filename="deviceSettingsDisabled" retainaspect="1"/>
 		<image name="shrpSettings" filename="shrpSettings" retainaspect="1"/>
 		<image name="shrpSettingsDisabled" filename="shrpSettingsDisabled" retainaspect="1"/>
-
 		
 		<image name="shrpCredits" filename="shrpCredits" retainaspect="1"/>
 		<image name="dashboardBackground" filename="dashboardBackground" retainaspect="1"/>

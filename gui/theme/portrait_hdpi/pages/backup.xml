@@ -142,7 +142,6 @@
 			</text>
 			<!--template name="c_tab_backup"/-->
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@backup_hdr=Backup} {@name=Name:}</text>
@@ -204,7 +203,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
 				<text>{@c_encrypt_ques=Encrypt your Backup?}</text>
 			</text>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
@@ -282,7 +280,6 @@
 				<action function="clearInput">tw_backup_password2;backupencryption2</action>
 			</button>
 			
-
 			<template name="keyboardtemplate"/>
 
 			<action>

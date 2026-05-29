@@ -96,8 +96,6 @@
 				</actions>
 			</button>
 
-
-
 			<button>
 				<placement x="72" y="1610"/>
 				<image resource="generalSettings"/>
@@ -133,10 +131,6 @@
 				</actions>
 			</action>
 		</page>
-
-
-		
-
 
 		<page name="timeSettings">
 			<template name="navCommon"/>
@@ -204,7 +198,6 @@
 				<action function="setguitimezone"/>
 			</button>
 
-
 			<button>
 				<placement x="72" y="1610"/>
 				<image resource="generalSettingsDisabled"/>
@@ -226,8 +219,6 @@
 				<image resource="shrpSettingsDisabled"/>
 				<action function="page">shrpSettings</action>
 			</button>
-
-
 
 			<action>
 				<touch key="back"/>
@@ -271,8 +262,6 @@
 				<action function="set">tw_screen_timeout_secs=0</action>
 			</button>
 
-
-
 			<text style="subOptionTitle2">
 				<placement x="%c_hawk_base_column%" y="%rPos22%"/>
 				<text>{@screen_to_slider_s=Screen timeout in seconds (0=disabled): %tw_screen_timeout_secs%}</text>
@@ -285,8 +274,6 @@
 				<text></text>
 				<data variable="tw_screen_timeout_secs" min="15" max="300"/>
 			</slidervalue>
-
-
 
 			<text style="subOptionTitle2">
 				<placement x="%c_hawk_base_column%" y="%rPos38%"/>
@@ -336,8 +323,6 @@
 				<data variable="tw_action_vibrate" min="0" max="500"/>
 			</slidervalue>
 
-
-
 			<button>
 				<placement x="72" y="1610"/>
 				<image resource="generalSettingsDisabled"/>
@@ -360,8 +345,6 @@
 				<action function="page">shrpSettings</action>
 			</button>
 
-
-
 			<action>
 				<touch key="back"/>
 				<actions>
@@ -375,7 +358,6 @@
 				</actions>
 			</action>
 		</page>
-
 
 		<page name="shrpSettings">
 			<template name="navCommon"/>
@@ -413,8 +395,6 @@
 				</listitem>
 			</listbox>
 
-
-
 			<button>
 				<placement x="72" y="1610"/>
 				<image resource="generalSettingsDisabled"/>
@@ -437,8 +417,6 @@
 				<action function="page">shrpSettings</action>
 			</button>
 
-
-
 			<action>
 				<touch key="back"/>
 				<actions>
@@ -452,7 +430,6 @@
 				</actions>
 			</action>
 		</page>
-
 
 		<page name="setTimeOffset">
 			<template name="overlayPage"/>
@@ -482,8 +459,6 @@
 			</action>
 		</page>
 
-
-
 		<page name="settings_language">
 			<template name="navCommon"/>
 			<template name="c_status_bar"/>
@@ -507,7 +482,6 @@
 				<action function="setlanguage"/>
 			</button>
 
-
 			<action>
 				<touch key="home" />
 				<action function="page">c_refresh</action>
@@ -518,6 +492,5 @@
 				<action function="page">c_refresh</action>
 			</action>
 		</page>
-		
 	</pages>
 </recovery>

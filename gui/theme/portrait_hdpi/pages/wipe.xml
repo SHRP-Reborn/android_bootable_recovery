@@ -22,7 +22,6 @@
 				<text>{@wipe_btn=Wipe} {@options_hdr=Options}</text>
 			</text>
 
-
 			<button>
 				<condition var1="tw_is_encrypted" var2="1"/>
 				<condition var1="tw_has_data_media" var2="0"/>
@@ -43,7 +42,6 @@
 					<action function="page">confirm_action</action>
 				</actions>
 			</button>
-
 
 			<button>
 				<condition var1="tw_has_data_media" var2="1"/>
@@ -66,9 +64,6 @@
 					<action function="page">advancedwipe</action>
 				</actions>
 			</button>
-
-
-
 
 			<button>
 				<placement x="636" y="1594"/>
@@ -232,7 +227,6 @@
 				</actions>
 			</button>
 
-
 			<action>
 				<touch key="home"/>
 				<action function="page">c_refresh</action>
@@ -293,9 +287,6 @@
 				<text>{@c_warning_head_info=Do it carefully}</text>
 			</text>
 
-
-
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@partitionName=Partition Name:}</text>
@@ -304,7 +295,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos24%"/>
 				<text>%tw_partition_name%</text>
 			</text>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos31%"/>
@@ -315,7 +305,6 @@
 				<text>%tw_partition_mount_point%</text>
 			</text>
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos43%"/>
 				<text>{@partitionFileSystem=File system:}</text>
@@ -324,7 +313,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos48%"/>
 				<text>%tw_partition_file_system%</text>
 			</text>
-
 
 			<!--text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
@@ -341,7 +329,6 @@
 				<text>{@shrpBaseNo=No}</text>
 			</text-->
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos55%"/>
 				<text>{@partitionRemovable=Removable:}</text>
@@ -357,7 +344,6 @@
 				<text>{@shrpBaseNo=No}</text>
 			</text>
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos72%"/>
 				<text>{@partitionStorageInfo=Storage info:}</text>
@@ -367,7 +353,6 @@
 				<text>{@partitionSizeInfo=%tw_partition_free%MB free out of %tw_partition_size%}MB</text>
 			</text>
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos84%"/>
 				<text>{@partitionBackupSize=Backup Size:}</text>
@@ -376,10 +361,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos89%"/>
 				<text>%tw_partition_backup_size%MB</text>
 			</text>
-
-
-
-
 
 			<button style="c_circle4">
 				<condition var1="tw_partition_can_resize" op="=" var2="1"/>
@@ -422,7 +403,6 @@
 				<text>{@change_fs_btn_s=Change}</text>
 				<action function="page">selectfilesystem</action>
 			</button>
-
 
 			<action>
 				<touch key="home"/>
@@ -472,8 +452,6 @@
 				<text>{@change_fs_warn1=Some ROMs or kernels may not support some file systems.} {@change_fs_warn2=Proceed with caution!}</text>
 			</textbox>
 
-
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="40" yref="%rPos24%" yop="+"/>
 				<text>{@partitionMountPoint=Mount Point:}</text>
@@ -491,8 +469,6 @@
 				<placement x="%c_hawk_base_column%" y="40" yref="%rPos41%" yop="+"/>
 				<text>%tw_partition_file_system%</text>
 			</text>
-
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="40" yref="%rPos50%" yop="+"/>

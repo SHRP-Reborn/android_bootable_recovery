@@ -11,8 +11,6 @@
 				<text>{@c_magisk_m=Magisk Manager}</text>
 			</button>
 
-
-
 			<button>
 				<condition var1="c_magisk_status" op="=" var2="0"/>
 				<placement x="464" y="1496"/>
@@ -45,7 +43,6 @@ sh init;
 				<action function="page">c_refresh</action>
 			</action>
 		</page>
-
 
 		<page name="magiskDashboard">
 			<template name="navCommon"/>
@@ -110,7 +107,6 @@ sh c_core_only_enabler;
 				<text>N/A</text>
 			</text>
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="-15" yref="%rPos48%" yop="+"/>
 				<text>{@available=Available} {@c_magisk=Magisk} {@c_version=Version}</text>
@@ -119,8 +115,6 @@ sh c_core_only_enabler;
 				<placement x="%c_hawk_base_column%" y="-15" yref="%rPos53%" yop="+"/>
 				<text>v%c_magisk_stock_var%</text>
 			</text>
-
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos62%"/>
@@ -158,7 +152,6 @@ sh c_core_only_enabler;
 					</actions>
 				</listitem>
 
-
 				<listitem name="{@installMagisk=Install Magisk}">
 					<condition var1="exclude_magisk_flash" var2="1"/>
 					<condition var1="shrpMagiskRoot" op="=" var2="1"/>
@@ -200,7 +193,6 @@ sh c_core_only_enabler;
 					</actions>
 				</listitem>
 
-
 				<listitem name="{@updateMagisk=Update Magisk}">
 					<condition var1="exclude_magisk_flash" var2="1"/>
 					<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
@@ -241,7 +233,6 @@ sh c_core_only_enabler;
 						<action function="page">magisk_action</action>
 					</actions>
 				</listitem>
-
 
 				<listitem name="{@c_unroot=Unroot}">
 					<condition var1="exclude_magisk_flash" var2="1"/>
@@ -289,7 +280,6 @@ sh c_core_only_enabler;
 					<action function="overlay">magiskModules</action>
 				</listitem>
 			</listbox>
-
 
 			<action>
 				<touch key="back"/>
@@ -342,7 +332,6 @@ rm -rf _magisk
 				<text>{@moduleNull=No magisk module installed}</text>
 			</button>
 
-
 			<action>
 				<actions>
 					<action function="set">refreshElement=1</action>
@@ -371,7 +360,6 @@ rm -rf _magisk
 				<text>{@c_disabled=Disabled}</text>
 				<data variable="dummy"/>
 			</checkbox>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos25%"/>
@@ -437,7 +425,6 @@ rm -f %modulePath%/disable;
 					<action function="overlay">uninstallModule</action>
 				</listitem>
 			</listbox>
-
 
 			<action>
 				<touch key="back"/>

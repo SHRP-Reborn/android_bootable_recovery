@@ -71,7 +71,6 @@
 				<action function="page">usb_mount</action>
 			</button>
 
-
 			<button>
 				<condition var1="tw_has_mtp" var2="1"/>
 				<condition var1="tw_mtp_enabled" var2="0"/>
@@ -96,7 +95,6 @@
 					<action function="overlay">select_storage</action>
 				</actions>
 			</button>
-
 
 			<action>
 				<touch key="home"/>
@@ -130,7 +128,6 @@
 				<image resource="c_usb"/>
 				<action function="page">usb_umount</action>
 			</button>
-
 
 			<action>
 				<action function="mount">usb</action>
@@ -193,9 +190,6 @@
 				<data variable="tw_never_show_system_ro_page"/>
 			</checkbox>
 
-
-
-
 			<button>
 				<placement x="860" y="%rndPos93%"/>
 				<image resource="c_cancel"/>
@@ -238,7 +232,6 @@
 				<text>{@decrypt_data_btn=Decrypt Data}</text>
 			</text>
 
-
 			<text style="subOptionTitle">
 				<condition var1="tw_password_fail" op="!=" var2="1"/>
 				<condition var1="tw_is_fbe" op="!=" var2="1"/>
@@ -275,7 +268,6 @@
 				<placement x="60" y="100" yref="%rPos24%" yop="+"/>
 				<text>{@restore_dec_fail=Password failed, please try again!}</text>
 			</text>
-
 
 			<button>
 				<placement x="860" y="915"/>
@@ -322,7 +314,6 @@
 				<action function="page">trydecrypt</action>
 			</patternpassword>
 
-
 			<button style="c_circle4">
 				<placement x="680" y="%rndPos105%"/>
 				<text>3x3</text>
@@ -368,7 +359,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
 				<text>{@decrypt_data_btn=Decrypt Data}</text>
 			</text>
-
 
 			<text style="subOptionTitle">
 				<condition var1="tw_password_fail" op="!=" var2="1"/>

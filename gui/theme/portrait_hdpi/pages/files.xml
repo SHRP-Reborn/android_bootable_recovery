@@ -35,7 +35,6 @@
 			<template name="c_status_bar"/>
 			<template name="c_simple_sort"/>
 			
-
 			<text style="pageTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
 				<text>{@files_btn=Files}</text>
@@ -138,7 +137,6 @@
 				<action function="set">selectionHandle=-1</action>
 			</button>
 
-			
 			<action>
 				<actions>
 					<action function="set">selectEnabled=0</action>
@@ -167,7 +165,6 @@
 		<page name="objectInfoAction">
 			<template name="navBackOnly"/>
 			<template name="c_status_bar"/>
-
 
 			<text style="pageTitle">
 				<condition var1="isFile" var2="1"/>
@@ -208,7 +205,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos36%"/>
 				<text>%permText%</text>
 			</text>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos45%"/>
@@ -324,11 +320,6 @@
 				</listitem>
 			</listbox>
 
-
-
-
-
-
 			<button>
 				<placement x="0" y="1610"/>
 				<image resource="actionCopy"/>
@@ -363,15 +354,12 @@
 				<action function="page">fileRename</action>
 			</button>
 
-
-
 			<button>
 				<placement x="540" y="1610"/>
 				<image resource="actionDelete"/>
 				<action function="set">fManagerAction=remove</action>
 				<action function="overlay">deleteConfirm</action>
 			</button>
-
 
 			<button>
 				<condition var1="isFile" var2="0"/>
@@ -381,7 +369,6 @@
 				<action function="set">newFolderName=NewFolder</action>
 				<action function="page">createFolder</action>
 			</button>
-
 
 			<action>
 				<touch key="back"/>
@@ -470,7 +457,6 @@
 				<action function="page">clear_vars</action>
 			</button>
 
-
 			<button>
 				<placement x="900" y="1610"/>
 				<image resource="openSideBar"/>
@@ -536,7 +522,6 @@
 			</action>
 		</page>
 
-
 		<page name="fileRename">
 			<template name="navCommon"/>
 			<template name="c_status_bar"/>
@@ -554,7 +539,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
 				<text>{@fm_rename_folder_btn=Rename Folder}</text>
 			</text>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
@@ -609,7 +593,6 @@
 				<text>{@c_create=Create} {@fm_type_folder=Folder}</text>
 			</text>
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@name=Name:}</text>
@@ -663,7 +646,6 @@
 				<text>{@zipName=Zip name}</text>
 			</text>
 
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@name=Name:}</text>
@@ -704,8 +686,6 @@
 				</actions>
 			</action>
 		</page>
-
-
 
 		<page name="deleteConfirm">
 			<template name="overlayPage"/>
@@ -793,7 +773,6 @@
 			</button>
 		</page>
 
-
 		<page name="setPermissionOly">
 			<template name="navCommon"/>
 			<template name="c_status_bar"/>
@@ -821,9 +800,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos24%"/>
 				<text>%permText%</text>
 			</text>
-
-
-
 
 			<!--Permission Section-->
 
@@ -903,8 +879,6 @@
 				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
 			</button>
 
-
-
 			<button style="permBtnEnabled">
 				<condition var1="NewpermGroupR" var2="1"/>
 				<placement x="230" yop="+" y="75" yref="%rPos42%" w="200" h="200"/>
@@ -950,8 +924,6 @@
 				<action function="set">NewpermGroupX=1</action>
 				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
 			</button>
-
-
 
 			<button style="permBtnEnabled">
 				<condition var1="NewpermGlobalR" var2="1"/>
@@ -1001,8 +973,6 @@
 				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
 			</button>
 
-
-
 			<button style="cnfrmBtn">
 				<condition var1="permChanged" var2="1"/>
 				<condition var1="isFile" var2="1"/>
@@ -1041,10 +1011,6 @@
 					<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
 				</actions>
 			</button>
-
-
-
-			
 
 			<button style="cnfrmBtn">
 				<condition var1="isFile" var2="0"/>
@@ -1090,8 +1056,6 @@
 				<text>{@fm_set_perms_hdr=Set Permissions}</text>
 			</text>
 
-
-
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@fm_perms=Permissions:}</text>
@@ -1133,7 +1097,6 @@
 			</action>
 		</page>
 
-
 		<page name="textEditorPanel">
 			<template name="navCommon"/>
 			<template name="c_status_bar"/>
@@ -1151,7 +1114,6 @@
 				<text>%refresh%</text>
 				<editorDisplay>dummy</editorDisplay>
 			</textbox>
-
 
 			<button style="cnfrmBtn">
 				<placement x="55" y="1300" w="310" h="110"/>
@@ -1200,7 +1162,6 @@
 			</action>
 		</page>
 
-
 		<page name="editorLinenoInputPanel">
 			<template name="navCommon"/>
 			<template name="c_status_bar"/>
@@ -1212,7 +1173,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
 				<text>{@c_enter_line_no=Enter Line No.}</text>
 			</text>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
@@ -1255,8 +1215,6 @@
 			</action>
 		</page>
 		
-
-
 		<page name="editorTextInputPanel">
 			<template name="navCommon"/>
 			<template name="c_status_bar"/>
@@ -1268,7 +1226,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
 				<text>{@c_enter_text=Enter your text}</text>
 			</text>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
@@ -1311,7 +1268,6 @@
 			</action>
 		</page>
 
-
 		<page name="editorLinenoRemoveLine">
 			<template name="navCommon"/>
 			<template name="c_status_bar"/>
@@ -1323,7 +1279,6 @@
 				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
 				<text>{@c_enter_line_no=Enter Line No.}</text>
 			</text>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
@@ -1366,13 +1321,6 @@
 			</action>
 		</page>
 
-
-
-
-
-
-
-
 		<page name="searchPanel">
 			<template name="overlayPage"/>
 
@@ -1380,7 +1328,6 @@
 				<placement x="0" y="%rPos0%" w="1080" h="%rndPos17%"/>
 				<fill color="%backgroundColor%"/>
 			</button>
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="-20" yref="%rPos5%" yop="+"/>
@@ -1411,8 +1358,6 @@
 			<template name="keyboardtemplate"/>
 		</page>
 
-
-
 		<page name="fileManager_sideBar">
 			<background color="%semi_transparent%"/>
 			<fill color="%backgroundColor%">
@@ -1435,7 +1380,6 @@
 					<action function="sig"/>
 				</actions>
 			</button>
-
 
 			<image>
 				<placement x="59" y="363"/>
@@ -1460,11 +1404,6 @@
 				<action function="fTools">setDestination;%sideBarDes%;/</action>
 				<action function="overlay"/>
 			</button>
-
-
-
-
-
 
 			<image>
 				<placement x="59" y="363" yop="+" yref="160"/>
@@ -1495,12 +1434,6 @@
 				<action function="overlay"/>
 			</button>
 
-
-
-
-
-
-
 			<image>
 				<placement x="59" y="363" yop="+" yref="320"/>
 				<image resource="fileLocInternal"/>
@@ -1529,12 +1462,6 @@
 				<action function="fTools">setDestination;%sideBarDes%;%internal_storage_location%</action>
 				<action function="overlay"/>
 			</button>
-
-
-
-
-
-
 
 			<image>
 				<placement x="59" y="363" yop="+" yref="480"/>
@@ -1565,10 +1492,6 @@
 				<action function="overlay"/>
 			</button>
 
-
-
-
-
 			<image>
 				<placement x="59" y="363" yop="+" yref="640"/>
 				<image resource="fileLocOtg"/>
@@ -1598,20 +1521,17 @@
 				<action function="overlay"/>
 			</button>
 
-
 			<button>
 				<placement x="550" y="1800"/>
 				<image resource="fileMangerSettings"/>
 				<action function="overlay">fSettings</action>
 			</button>
 
-
 			<action>
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
 			</action>
 		</page>
-
 
 		<page name="fSettings">
 			<template name="overlayPage"/>

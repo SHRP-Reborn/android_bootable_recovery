@@ -37,7 +37,6 @@
 				</actions>
 			</button>
 
-
 			<action>
 				<touch key="home"/>
 				<action function="page">c_refresh</action>

@@ -132,7 +132,6 @@
 				</actions>
 			</button>
 
-
 			<action>
 				<touch key="home"/>
 				<actions>
@@ -185,8 +184,6 @@
 				<font resource="midBold" color="%secondaryColor%"/>
 				<action function="page">decrypt_users</action>
 			</button>
-
-
 
 			<button>
 				<placement x="860" y="%rndPos105%"/>

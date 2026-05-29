@@ -10,14 +10,10 @@
 				<image resource="SKYHAWK"/>
 			</image>
 
-
-
 			<text style="dashboardHeader">
 				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
 				<text>{@advanced_btn=Advanced}</text>
 			</text>
-
-
 
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
@@ -36,9 +32,6 @@
 				<text>{@copy_log_btn=Copy Log}</text>
 				<action function="page">copylog</action>
 			</button>
-
-
-
 
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
@@ -61,9 +54,6 @@
 				<action function="page">fixcontexts</action>
 			</button>
 
-
-
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<placement x="587" y="%rPos25%"/>
@@ -80,9 +70,6 @@
 				<text>{@c_adb_side_load=Sideload}</text>
 				<action function="page">sideload</action>
 			</button>
-
-
-
 
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
@@ -106,9 +93,6 @@
 					<action function="page">partsdcardsel</action>
 				</actions>
 			</button>
-
-
-
 
 			<!-- Flash SHRP Reborn TO ramdisk-->
 			<button>
@@ -155,7 +139,6 @@
 			</button>
 			<!-- Flash SHRP Reborn TO ramdisk end-->
 
-
 			<!-- Merge SnapShot-->
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
@@ -192,7 +175,6 @@
 				</actions>
 			</button>
 			<!-- Merge SnapShot ends-->
-
 
 			<!-- Unmap Super Partition-->
 			<button>
@@ -231,7 +213,6 @@
 			</button>
 			<!-- Map Super Partition ends-->
 
-
 			<button>
 				<condition var1="dashboardSubTintEnabled" var2="1"/>
 				<condition var1="tw_is_fbe" var2="1"/>
@@ -259,7 +240,6 @@
 					<action function="page">decrypt_users</action>
 				</actions>
 			</button>
-
 
 			<action>
 				<touch key="home"/>
@@ -297,7 +277,6 @@
 					<data variable="tw_wipe_cache"/>
 				</listitem>
 			</listbox>
-
 
 			<button>
 				<image resource="c_ok"/>
@@ -342,7 +321,6 @@
 				<text>{@fix_contexts_note1=Note: Fixing contexts is rarely needed.} {@c_file_context=Fixing SELinux Contexts may cause your device to not boot properly.}</text>
 			</textbox>
 
-
 			<button>
 				<image resource="c_ok"/>
 				<placement x="860" y="1628"/>
@@ -385,7 +363,6 @@
 				<data name="tw_crypto_user_id" />
 			</listbox>
 
-
 			<button>
 				<placement x="860" y="%rndPos105%"/>
 				<image resource="c_ok"/>
@@ -417,7 +394,6 @@
 				<text>{@change_twrp_folder_btn=Change TWRP folder}</text>
 			</text>
 			<!--template name="c_tab_backup"/-->
-
 
 			<text style="subOptionTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
@@ -479,7 +455,6 @@
 					<action function="page">filecheck</action>
 				</actions>
 			</button>
-
 
 			<template name="keyboardtemplate"/>
 
